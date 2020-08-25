@@ -9,6 +9,10 @@ development_dependencies:
     github: crystal-ameba/ameba
     version: ~> 0.13.0
 
+targets:
+  wafalyzer:
+    main: src/cli.cr
+
 crystal: 0.35.1
 
 license: MIT
