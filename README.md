@@ -1,4 +1,4 @@
-# wafalyzer
+# wafalyzer [![Build Status](https://travis-ci.com/Sija/wafalyzer.svg?branch=master)](https://travis-ci.com/Sija/wafalyzer) [![Releases](https://img.shields.io/github/release/Sija/wafalyzer.svg)](https://github.com/Sija/wafalyzer/releases) [![License](https://img.shields.io/github/license/Sija/wafalyzer.svg)](https://github.com/Sija/wafalyzer/blob/master/LICENSE)
 
 TODO: Write a description here
 
