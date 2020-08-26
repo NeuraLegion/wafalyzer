@@ -4,6 +4,10 @@ version: 0.1.0
 authors:
   - Sijawusz Pur Rahnama <sija@sija.pl>
 
+dependencies:
+  climate:
+    github: Sija/climate.cr
+
 development_dependencies:
   ameba:
     github: crystal-ameba/ameba
