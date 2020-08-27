@@ -1,106 +1,10 @@
+require "./waf/*"
+
 module Wafalyzer
   # Array of loaded `Waf` profiles
   class_property wafs = [] of Waf
 
   abstract class Waf
-    # Full name of the WAF solution being defined
-    class_property! product : String
-
-    # :ditto:
-    def self.product(value : String)
-      @@product = value
-    end
-
-    delegate :product, :product?,
-      to: self.class
-
-    @@headers = {} of String => Regex
-
-    # Declaration that returned HTTP response header *name*
-    # must match the given *value* pattern.
-    #
-    # ```
-    # class Waf::Foo < Waf
-    #   # partial match, case sensitive
-    #   matches_header "Server", "Apache"
-    #
-    #   # partial match, case insensitive
-    #   matches_header "Server", /apache/i
-    #
-    #   # exact match, case insensitive
-    #   matches_header "Server", /^apache$/i
-    #
-    #   # asserts the pattern for multiple headers at once
-    #   matches_header %w(Cookie Set-Cookie), /__unique_id/
-    #
-    #   # asserts that "X-Foo" header is not empty
-    #   matches_header "X-Foo"
-    #
-    #   # same as above, but for multiple headers at once
-    #   matches_header %w(X-Foo X-Bar X-Baz)
-    # end
-    # ```
-    #
-    # NOTE: Additive - calling this method multiple times
-    # will create an union with the already existing value.
-    def self.matches_header(name : String, value : Regex)
-      @@headers[name] =
-        @@headers[name]?.try(&.+(value)) || value
-    end
-
-    # :ditto:
-    def self.matches_header(name : String, value : String)
-      matches_header name, Regex.new(Regex.escape(value))
-    end
-
-    # :ditto:
-    def self.matches_header(names : Enumerable(String), value : Regex | String)
-      names.each { |name| matches_header name, value }
-    end
-
-    # :ditto:
-    def self.matches_header(name : String | Enumerable(String))
-      matches_header name, /.+/
-    end
-
-    @@body : Regex?
-
-    # Declaration that returned HTTP body must match
-    # the given *value* pattern.
-    #
-    # ```
-    # class Waf::Foo < Waf
-    #   matches_body /<title>403 Forbidden<\/title>/i
-    # end
-    # ```
-    #
-    # NOTE: Additive - calling this method multiple times
-    # will create an union with the already existing value.
-    def self.matches_body(value : Regex)
-      @@body =
-        @@body.try(&.+(value)) || value
-    end
-
-    @@status : HTTP::Status?
-
-    # Declaration that returned HTTP status must match
-    # the given *status*.
-    #
-    # ```
-    # class Waf::Foo < Waf
-    #   matches_status :forbidden
-    #   # or
-    #   matches_status 403
-    # end
-    # ```
-    def self.matches_status(@@status : HTTP::Status)
-    end
-
-    # :ditto:
-    def self.matches_status(code : Int32)
-      matches_status HTTP::Status.new(code)
-    end
-
     macro inherited
       {% unless @type.abstract? %}
         ::Wafalyzer.wafs << new
