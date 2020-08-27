@@ -2,7 +2,7 @@ require "./spec_helper"
 
 Spectator.describe Wafalyzer do
   let(wafs) { subject.wafs }
-  let(tough_waf) { wafs.find(&.product.=~(/hardcore/i)) }
+  let(tough_waf) { wafs.find(&.class.==(Wafalyzer::Waf::ToughWaf)) }
 
   describe ".wafs" do
     it "return an array of all loaded Waf classes" do

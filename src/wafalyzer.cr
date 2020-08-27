@@ -7,7 +7,10 @@ module Wafalyzer
   extend self
 
   # Returns an array of `Waf`s detected for the given request.
-  def detect(url : String | URI, method : String = "GET", headers : HTTP::Headers? = nil, body : HTTP::Client::BodyType? = nil) : Array(Waf)
+  def detect(url : String | URI, method : String = "GET", headers : HTTP::Headers? = nil, body : HTTP::Client::BodyType? = nil, user_agent : String? = nil) : Array(Waf)
+    headers ||= HTTP::Headers.new
+    headers["User-Agent"] ||= user_agent || settings.user_agent
+
     response =
       HTTP::Client.exec(method, url, headers, body)
 
