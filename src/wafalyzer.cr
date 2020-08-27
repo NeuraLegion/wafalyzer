@@ -11,19 +11,29 @@ module Wafalyzer
     headers ||= HTTP::Headers.new
     headers["User-Agent"] ||= user_agent || settings.user_agent
 
+    Log.debug {
+      "Sending HTTP %s request to url '%s' with headers: %s" % {method, url, headers.to_h}
+    }
+
     response =
       HTTP::Client.exec(method, url, headers, body)
 
-    Log.debug &.emit "HTTP response received",
-      response: response.inspect
+    Log.debug {
+      "HTTP response received: %s" % response.inspect
+    }
 
-    wafs.select do |waf|
+    detected = wafs.select do |waf|
       waf.matches?(response)
     rescue ex : IO::Error
       Log.warn(exception: ex) {
-        "Possible network level firewall detected (hardware), received an aborted connection"
+        "(%s): Possible network level firewall detected (hardware), " \
+        "received an aborted connection" % waf.inspect
       }
     end
+    Log.debug {
+      "Detected wafs: %s" % detected.inspect
+    }
+    detected
   end
 end
 
