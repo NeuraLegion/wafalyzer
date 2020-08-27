@@ -14,7 +14,13 @@ module Wafalyzer
     Log.debug &.emit "HTTP response received",
       response: response.inspect
 
-    wafs.select(&.matches?(response))
+    wafs.select do |waf|
+      waf.matches?(response)
+    rescue ex : IO::Error
+      Log.warn(exception: ex) {
+        "Possible network level firewall detected (hardware), received an aborted connection"
+      }
+    end
   end
 end
 
