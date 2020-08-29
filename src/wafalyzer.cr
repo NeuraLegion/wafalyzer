@@ -35,6 +35,11 @@ module Wafalyzer
     }
     detected
   end
+
+  # Returns `true` if there was any `Waf` detected for the given request.
+  def detects?(*args, **kwargs) : Bool
+    !detect(*args, **kwargs).empty?
+  end
 end
 
 require "./wafalyzer/*"
