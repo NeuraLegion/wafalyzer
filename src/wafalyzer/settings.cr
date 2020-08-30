@@ -1,9 +1,11 @@
 module Wafalyzer
   class Settings
+    private SUPPORT_PATH = Path[__DIR__, "..", "support"]
+
     class_property timeout : Time::Span?
     class_property default_user_agent : String = "wafalyzer/%s" % VERSION
     class_property user_agents : Array(String) {
-      File.read_lines(Path[__DIR__, "..", "support", "user_agents.txt"]).compact!
+      File.read_lines(SUPPORT_PATH / "user_agents.txt").compact!
     }
     class_property? use_random_user_agent = false
 
