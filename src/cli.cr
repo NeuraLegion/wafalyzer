@@ -30,6 +30,10 @@ OptionParser.parse do |parser|
     user_agent = value
   end
 
+  parser.on "--wafs", "Outputs a list of possible firewalls that can be detected" do
+    puts Wafalyzer.wafs.join('\n', &.product)
+    exit
+  end
   parser.on "-v", "--version", "Shows version" do
     puts Wafalyzer::VERSION
     exit
