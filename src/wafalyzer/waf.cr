@@ -14,6 +14,10 @@ module Wafalyzer
       {% end %}
     end
 
+    def to_json(json : JSON::Builder)
+      {product: product?}.to_json(json)
+    end
+
     # Returns `true` if given *response* matches defined
     # assertions, `false` otherwise.
     def matches?(response : HTTP::Client::Response) : Bool

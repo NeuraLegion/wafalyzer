@@ -10,6 +10,7 @@ Colorize.on_tty_only!
 
 method = "GET"
 body = nil
+json = false
 
 use_random_user_agent = false
 user_agent = nil
@@ -22,6 +23,9 @@ OptionParser.parse do |parser|
   end
   parser.on "-b VALUE", "--body=VALUE", "Uses supplied body when issuing request" do |value|
     body = value
+  end
+  parser.on "-j", "--json", "Exports results as JSON string" do
+    json = true
   end
   parser.on "-r", "--random-user-agent", "Uses a random user agent string for the issued HTTP requests" do
     use_random_user_agent = true
@@ -58,6 +62,11 @@ wafs = Wafalyzer.detect(
   body: body,
   user_agent: user_agent,
 )
+
+if json
+  puts wafs.to_json
+  exit
+end
 
 case wafs.size
 when 0

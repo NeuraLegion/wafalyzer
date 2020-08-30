@@ -1,5 +1,6 @@
 require "http"
 require "log"
+require "json"
 
 module Wafalyzer
   Log = ::Log.for(self)
