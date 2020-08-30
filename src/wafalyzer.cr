@@ -1,4 +1,5 @@
 require "http"
+require "uri"
 require "log"
 require "json"
 
@@ -30,34 +31,50 @@ module Wafalyzer
     client
   end
 
-  # Returns an array of `Waf`s detected for the given request.
-  def detect(uri : URI, method : String = "GET", headers : HTTP::Headers? = nil, body : HTTP::Client::BodyType? = nil, user_agent : String? = nil) : Array(Waf)
+  private def client(uri : URI)
+    yield client = build_client(uri)
+  ensure
+    client.try &.close
+  end
+
+  private def exec_request(uri : URI, method : String, headers : HTTP::Headers?, body : HTTP::Client::BodyType?, user_agent : String?) : HTTP::Client::Response
     headers ||= HTTP::Headers.new
     headers["User-Agent"] ||= user_agent || settings.user_agent
 
-    Log.debug {
-      "Sending HTTP %s request to url '%s' with headers: %s" % {method, uri, headers.to_h}
+    Log.debug &.emit("Sending HTTP request", {
+      method:  method,
+      url:     uri.to_s,
+      headers: headers.to_h,
+    })
+
+    client uri, &.exec(method, uri.full_path, headers, body).tap do |response|
+      Log.debug &.emit("HTTP response received", {
+        status_code: response.status.code,
+        headers:     response.headers.to_h,
+      })
+    end
+  rescue ex : IO::Error
+    Log.warn(exception: ex) {
+      "Possible network level firewall detected (hardware), " \
+      "received an aborted connection"
     }
-
-    response =
-      build_client(uri).exec(method, uri.full_path, headers, body)
-
-    Log.debug {
-      "HTTP response received: %s" % response.inspect
+    raise ex
+  rescue ex
+    Log.warn(exception: ex) {
+      "Failed to obtain target metadata"
     }
+    raise ex
+  end
 
-    detected = wafs.select do |waf|
-      waf.matches?(response)
-    rescue ex : IO::Error
-      Log.warn(exception: ex) {
-        "(%s): Possible network level firewall detected (hardware), " \
-        "received an aborted connection" % waf.inspect
+  # Returns an array of `Waf`s detected for the given request.
+  def detect(uri : URI, method : String = "GET", headers : HTTP::Headers? = nil, body : HTTP::Client::BodyType? = nil, user_agent : String? = nil) : Array(Waf)
+    response = exec_request(uri, method, headers, body, user_agent)
+
+    wafs.select(&.matches?(response)).tap do |detected|
+      Log.debug {
+        "Detected wafs: %s" % detected.inspect
       }
     end
-    Log.debug {
-      "Detected wafs: %s" % detected.inspect
-    }
-    detected
   end
 
   # :ditto:

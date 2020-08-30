@@ -9,30 +9,34 @@ protected def fail(message : String? = nil)
   abort(message.try(&.climatize))
 end
 
-Climate.configure do |settings|
-  settings.use_defaults!
-end
+Log
+  .setup_from_env
 
-Colorize.on_tty_only!
+Colorize
+  .on_tty_only!
+
+Climate.settings
+  .use_defaults!
 
 method = "GET"
-body = nil
 headers = HTTP::Headers.new
-json = false
+body = nil
 timeout = nil
-
+json = false
 use_random_user_agent = false
 user_agent = nil
 
 OptionParser.parse do |parser|
-  parser.banner = "Usage: {#{PROGRAM_NAME}} <url> [arguments]"
+  parser.banner = "Usage: {#{PROGRAM_NAME}} [arguments] <url>"
 
   parser.on "-m VALUE", "--method=VALUE", "Uses supplied method type when issuing request" do |value|
     method = value.upcase
   end
+
   parser.on "-b VALUE", "--body=VALUE", "Uses supplied body when issuing request" do |value|
     body = value
   end
+
   parser.on "-h VALUE", "--header=VALUE", "Uses supplied header when issuing request" do |value|
     header = value.split('=', 2)
     unless header.size == 2
@@ -41,15 +45,19 @@ OptionParser.parse do |parser|
     key, value = header
     headers[key] = value
   end
-  parser.on "-j", "--json", "Exports results as JSON string" do
-    json = true
-  end
+
   parser.on "-t VALUE", "--timeout=VALUE", "Sets the connection timeout to the given value (in seconds)" do |value|
     timeout = value.to_i.seconds
   end
+
+  parser.on "-j", "--json", "Exports results as JSON string" do
+    json = true
+  end
+
   parser.on "-r", "--random-user-agent", "Uses a random user agent string for the issued HTTP requests" do
     use_random_user_agent = true
   end
+
   parser.on "-u VALUE", "--user-agent=VALUE", "Uses supplied user agent string" do |value|
     user_agent = value
   end
@@ -58,10 +66,12 @@ OptionParser.parse do |parser|
     puts Wafalyzer.wafs.join('\n')
     exit
   end
+
   parser.on "-v", "--version", "Shows version" do
     puts Wafalyzer::VERSION
     exit
   end
+
   parser.on "--help", "Shows help" do
     puts parser.to_s.climatize
     exit
