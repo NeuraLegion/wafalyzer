@@ -17,6 +17,7 @@ Colorize.on_tty_only!
 
 method = "GET"
 body = nil
+headers = HTTP::Headers.new
 json = false
 timeout = nil
 
@@ -31,6 +32,14 @@ OptionParser.parse do |parser|
   end
   parser.on "-b VALUE", "--body=VALUE", "Uses supplied body when issuing request" do |value|
     body = value
+  end
+  parser.on "-h VALUE", "--header=VALUE", "Uses supplied header when issuing request" do |value|
+    header = value.split('=', 2)
+    unless header.size == 2
+      fail %(Value given for the [--header] argument should have format "name=value")
+    end
+    key, value = header
+    headers[key] = value
   end
   parser.on "-j", "--json", "Exports results as JSON string" do
     json = true
@@ -53,7 +62,7 @@ OptionParser.parse do |parser|
     puts Wafalyzer::VERSION
     exit
   end
-  parser.on "-h", "--help", "Shows help" do
+  parser.on "--help", "Shows help" do
     puts parser.to_s.climatize
     exit
   end
@@ -71,6 +80,7 @@ end
 wafs = Wafalyzer.detect(
   url: url,
   method: method,
+  headers: headers,
   body: body,
   user_agent: user_agent,
 )
