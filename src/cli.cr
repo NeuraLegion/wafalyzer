@@ -2,6 +2,13 @@ require "option_parser"
 require "climate"
 require "./wafalyzer"
 
+protected def fail(message : String? = nil)
+  if message = message.presence
+    message = "!Error¡: #{message}"
+  end
+  abort(message.try(&.climatize))
+end
+
 Climate.configure do |settings|
   settings.use_defaults!
 end
@@ -54,7 +61,7 @@ end
 
 url = ARGV[0]?
 url ||
-  abort "No <url> given!".climatize
+  fail "No <url> given!"
 
 Wafalyzer.configure do |settings|
   settings.timeout = timeout
