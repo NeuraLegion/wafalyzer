@@ -1,5 +1,6 @@
 module Wafalyzer
   class Settings
+    class_property timeout : Time::Span?
     class_property default_user_agent : String = "wafalyzer/%s" % VERSION
     class_property user_agents : Array(String) {
       File.read_lines(Path[__DIR__, "..", "support", "user_agents.txt"]).compact!

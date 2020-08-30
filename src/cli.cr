@@ -11,6 +11,7 @@ Colorize.on_tty_only!
 method = "GET"
 body = nil
 json = false
+timeout = nil
 
 use_random_user_agent = false
 user_agent = nil
@@ -26,6 +27,9 @@ OptionParser.parse do |parser|
   end
   parser.on "-j", "--json", "Exports results as JSON string" do
     json = true
+  end
+  parser.on "-t VALUE", "--timeout=VALUE", "Sets the connection timeout to the given value (in seconds)" do |value|
+    timeout = value.to_i.seconds
   end
   parser.on "-r", "--random-user-agent", "Uses a random user agent string for the issued HTTP requests" do
     use_random_user_agent = true
@@ -53,6 +57,7 @@ url ||
   abort "No <url> given!".climatize
 
 Wafalyzer.configure do |settings|
+  settings.timeout = timeout
   settings.use_random_user_agent = use_random_user_agent
 end
 
