@@ -35,7 +35,7 @@ OptionParser.parse do |parser|
   end
 
   parser.on "--wafs", "Outputs a list of possible firewalls that can be detected" do
-    puts Wafalyzer.wafs.join('\n', &.product)
+    puts Wafalyzer.wafs.join('\n')
     exit
   end
   parser.on "-v", "--version", "Shows version" do
@@ -73,8 +73,8 @@ when 0
   puts "No WAF detected"
 when 1
   puts "Detected WAF: %s" % \
-    wafs.first.product.colorize(:green)
+    wafs.first.colorize(:green)
 else
   puts "Detected more than one (!) WAF: %s" % \
-    wafs.join(", ", &.product.colorize(:green))
+    wafs.join(", ", &.colorize(:green))
 end

@@ -10,6 +10,12 @@ Spectator.describe Wafalyzer::Waf do
     end
   end
 
+  describe "#to_s" do
+    it "aliases to #product?" do
+      expect(&.to_s).to eq(subject.product?)
+    end
+  end
+
   describe "#matches?" do
     context "with matching value" do
       let(response1) do

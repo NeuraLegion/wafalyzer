@@ -14,6 +14,10 @@ module Wafalyzer
       {% end %}
     end
 
+    def to_s(io : IO) : Nil
+      io << product?
+    end
+
     def to_json(json : JSON::Builder)
       {product: product?}.to_json(json)
     end
