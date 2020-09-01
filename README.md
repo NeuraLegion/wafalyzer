@@ -1,8 +1,10 @@
 # wafalyzer [![Build Status](https://travis-ci.com/Sija/wafalyzer.svg?branch=master)](https://travis-ci.com/Sija/wafalyzer) [![Releases](https://img.shields.io/github/release/Sija/wafalyzer.svg)](https://github.com/Sija/wafalyzer/releases) [![License](https://img.shields.io/github/license/Sija/wafalyzer.svg)](https://github.com/Sija/wafalyzer/blob/master/LICENSE)
 
-TODO: Write a description here
+Wafalyzer is a firewall detection utility, which attempts to determine what WAF (if any) is in the front of a web application. It does that by means of passive analysis of the HTTP response metadata (status, headers, body) and if that fails, issuing additional requests with popular malicious payloads in order to (eventually) trigger WAF's response.
 
 ## Installation
+
+### Shard
 
 1. Add the dependency to your `shard.yml`:
 
@@ -14,17 +16,59 @@ TODO: Write a description here
 
 2. Run `shards install`
 
+### CLI
+
+1. Run `shards build`
+2. 🐗
+
 ## Usage
+
+Wafalyzer can be used as both - shard and/or standalone CLI utility.
+
+### Shard
 
 ```crystal
 require "wafalyzer"
+
+# See `Wafalyzer::Settings` for all available options.
+Wafalyzer.configure do |settings|
+  settings.use_random_user_agent = true
+end
+
+# See `Wafalyzer.detect` for all available options.
+Wafalyzer.detect(
+  url: "https://www.apple.com",
+  method: "POST",
+)
+# => [#<Wafalyzer::Waf::Akamai>]
 ```
 
-TODO: Write usage instructions here
+### CLI
+
+```console
+$ ./bin/wafalyzer -m POST -r https://www.apple.com
+```
+
+All of the flags can be listed by, passing `--help`.
+
+```console
+$ ./bin/wafalyzer --help
+```
+
+You can use `LOG_LEVEL` env variable to set the desired
+logs severity at runtime.
+
+```console
+$ LOG_LEVEL=debug ./bin/wafalyzer https://github.com
+```
 
 ## Development
 
-TODO: Write development instructions here
+Run specs with:
+
+```
+crystal spec
+```
 
 ## Contributing
 
