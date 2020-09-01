@@ -41,6 +41,8 @@ module Wafalyzer
     headers =
       headers.try(&.dup) || HTTP::Headers.new
 
+    headers["Accept"] ||= "*"
+    headers["Connection"] ||= "close"
     headers["User-Agent"] ||= user_agent || settings.user_agent
 
     Log.debug &.emit("Sending HTTP request", {
