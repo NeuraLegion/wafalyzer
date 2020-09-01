@@ -1,6 +1,17 @@
+require "baked_file_system"
 require "option_parser"
 require "climate"
 require "./wafalyzer"
+
+class Wafalyzer::SupportFS
+  extend BakedFileSystem
+
+  bake_folder "./support"
+
+  def self.read_file(path : String | Path) : String
+    get(path.to_s).gets_to_end
+  end
+end
 
 protected def fail(message : String? = nil)
   if message = message.presence

@@ -1,7 +1,5 @@
 module Wafalyzer
   class Settings
-    private SUPPORT_PATH = Path[__DIR__, "..", "support"]
-
     # Timeout being used for requests.
     class_property timeout : Time::Span?
 
@@ -9,11 +7,7 @@ module Wafalyzer
     class_property fallback_requests_count = 3
 
     # Array of parameter payloads, injected for fallback requests.
-    class_property payloads : Array(String) {
-      File
-        .read_lines(SUPPORT_PATH / "payloads.txt")
-        .compact!
-    }
+    class_property payloads : Array(String) { SupportFS.payloads }
 
     # Default `User-Agent` string, used when no other was given and the
     # `use_random_user_agent?` is set to `false`.
@@ -21,11 +15,7 @@ module Wafalyzer
 
     # Array of `User-Agent` http header strings, used in cases when the
     # `use_random_user_agent?` is being set to `true`.
-    class_property user_agents : Array(String) {
-      File
-        .read_lines(SUPPORT_PATH / "user_agents.txt")
-        .compact!
-    }
+    class_property user_agents : Array(String) { SupportFS.user_agents }
 
     # Setting it to `true` will make `user_agent` property pick a random
     # `User-Agent` string from the `user_agents` array.

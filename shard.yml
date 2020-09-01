@@ -5,6 +5,8 @@ authors:
   - Sijawusz Pur Rahnama <sija@sija.pl>
 
 dependencies:
+  baked_file_system:
+    github: schovi/baked_file_system
   climate:
     github: Sija/climate.cr
 
