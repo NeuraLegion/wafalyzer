@@ -28,6 +28,15 @@ Spectator.describe Wafalyzer do
         expect(&.detect("http://#{address}")).to eq([tough_waf])
       end
     end
+
+    it "doesn't mutate given headers" do
+      address = tough_waf_server.bind_unused_port
+      headers = HTTP::Headers.new
+      run_server(tough_waf_server) do
+        subject.detect("http://#{address}", headers: headers)
+        expect(headers).to be_empty
+      end
+    end
   end
 
   describe ".detects?" do

@@ -38,7 +38,9 @@ module Wafalyzer
   end
 
   private def exec_request(uri : URI, method : String, headers : HTTP::Headers?, body : HTTP::Client::BodyType?, user_agent : String?) : HTTP::Client::Response
-    headers ||= HTTP::Headers.new
+    headers =
+      headers.try(&.dup) || HTTP::Headers.new
+
     headers["User-Agent"] ||= user_agent || settings.user_agent
 
     Log.debug &.emit("Sending HTTP request", {
