@@ -66,8 +66,7 @@ module Wafalyzer
     raise ex
   end
 
-  # Returns an array of `Waf`s detected for the given request.
-  def detect(uri : URI, method : String = "GET", headers : HTTP::Headers? = nil, body : HTTP::Client::BodyType? = nil, user_agent : String? = nil) : Array(Waf)
+  private def detect_single(uri : URI, method : String, headers : HTTP::Headers?, body : HTTP::Client::BodyType?, user_agent : String?) : Array(Waf)
     response = exec_request(uri, method, headers, body, user_agent)
 
     wafs.select(&.matches?(response)).tap do |detected|
@@ -75,6 +74,47 @@ module Wafalyzer
         "Detected wafs: %s" % detected.inspect
       }
     end
+  end
+
+  private def mutate_uri(uri : URI, payload : String) : URI
+    query_params = uri.query_params
+
+    if query_params.empty?
+      key = "_%s" % Random::Secure.hex(6)
+    else
+      key, _ = query_params.first
+    end
+
+    query_params[key] = payload
+
+    uri.dup
+      .tap(&.query = query_params.to_s)
+  end
+
+  # Returns an array of `Waf`s detected for the given request.
+  def detect(uri : URI, method : String = "GET", headers : HTTP::Headers? = nil, body : HTTP::Client::BodyType? = nil, user_agent : String? = nil) : Array(Waf)
+    detected =
+      detect_single(uri, method, headers, body, user_agent)
+
+    if detected.empty?
+      # We need to sample our payloads upfront, in order to
+      # guarantee their uniqueness, and prevent potential
+      # duplicates when sampling on per-request basis
+      settings.payloads
+        .sample(settings.fallback_requests_count)
+        .each do |sample|
+          mutated_uri = mutate_uri(uri, sample)
+
+          detected =
+            detect_single(mutated_uri, method, headers, body, user_agent)
+
+          break unless detected.empty?
+        rescue
+          # Exceptions are being handled within the
+          # `detect_single` method call above
+        end
+    end
+    detected
   end
 
   # :ditto:

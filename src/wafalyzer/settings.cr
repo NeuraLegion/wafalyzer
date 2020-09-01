@@ -5,6 +5,16 @@ module Wafalyzer
     # Timeout being used for requests.
     class_property timeout : Time::Span?
 
+    # No. of additional iterations (after 1st failed request).
+    class_property fallback_requests_count = 3
+
+    # Array of parameter payloads, injected for fallback requests.
+    class_property payloads : Array(String) {
+      File
+        .read_lines(SUPPORT_PATH / "payloads.txt")
+        .compact!
+    }
+
     # Default `User-Agent` string, used when no other was given and the
     # `use_random_user_agent?` is set to `false`.
     class_property default_user_agent : String = "wafalyzer/%s" % VERSION

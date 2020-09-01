@@ -22,6 +22,7 @@ method = "GET"
 headers = HTTP::Headers.new
 body = nil
 timeout = nil
+fallback_requests_count = 3
 json = false
 use_random_user_agent = false
 user_agent = nil
@@ -48,6 +49,10 @@ OptionParser.parse do |parser|
 
   parser.on "-t VALUE", "--timeout=VALUE", "Sets the connection timeout to the given value (in seconds)" do |value|
     timeout = value.to_i.seconds
+  end
+
+  parser.on "-i VALUE", "--fallback-requests-count=VALUE", "Sets the number of additional iterations (after 1st failed request)" do |value|
+    fallback_requests_count = value.to_i
   end
 
   parser.on "-j", "--json", "Exports results as JSON string" do
@@ -84,6 +89,7 @@ url ||
 
 Wafalyzer.configure do |settings|
   settings.timeout = timeout
+  settings.fallback_requests_count = fallback_requests_count
   settings.use_random_user_agent = use_random_user_agent
 end
 
