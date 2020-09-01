@@ -28,7 +28,7 @@ use_random_user_agent = false
 user_agent = nil
 
 OptionParser.parse do |parser|
-  parser.banner = "Usage: {#{PROGRAM_NAME}} [arguments] <url>"
+  parser.banner = "Usage: {#{PROGRAM_NAME}} [arguments] <url>".climatize
 
   parser.on "-m VALUE", "--method=VALUE", "Uses supplied method type when issuing request" do |value|
     method = value.upcase
@@ -78,7 +78,7 @@ OptionParser.parse do |parser|
   end
 
   parser.on "--help", "Shows help" do
-    puts parser.to_s.climatize
+    puts parser
     exit
   end
 end
