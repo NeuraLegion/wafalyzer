@@ -70,16 +70,6 @@ module Wafalyzer
     raise ex
   end
 
-  private def detect_single(uri : URI, method : String, headers : HTTP::Headers?, body : HTTP::Client::BodyType?, user_agent : String?) : Array(Waf)
-    response = exec_request(uri, method, headers, body, user_agent)
-
-    wafs.select(&.matches?(response)).tap do |detected|
-      Log.debug {
-        "Detected wafs: %s" % detected.inspect
-      }
-    end
-  end
-
   private def mutate_uri(uri : URI, payload : String) : URI
     query_params = uri.query_params
 
@@ -93,6 +83,16 @@ module Wafalyzer
 
     uri.dup
       .tap(&.query = query_params.to_s)
+  end
+
+  private def detect_single(uri : URI, method : String, headers : HTTP::Headers?, body : HTTP::Client::BodyType?, user_agent : String?) : Array(Waf)
+    response = exec_request(uri, method, headers, body, user_agent)
+
+    wafs.select(&.matches?(response)).tap do |detected|
+      Log.debug {
+        "Detected wafs: %s" % detected.inspect
+      }
+    end
   end
 
   # Returns an array of `Waf`s detected for the given request.
