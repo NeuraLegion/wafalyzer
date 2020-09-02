@@ -97,6 +97,8 @@ module Wafalyzer
 
   # Returns an array of `Waf`s detected for the given request.
   def detect(uri : URI, method : String = "GET", headers : HTTP::Headers? = nil, body : HTTP::Client::BodyType? = nil, user_agent : String? = nil) : Array(Waf)
+    user_agent ||= settings.user_agent
+
     detected =
       detect_single(uri, method, headers, body, user_agent)
 
