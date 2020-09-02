@@ -76,7 +76,9 @@ module Wafalyzer
     if query_params.empty?
       key = "_%s" % Random::Secure.hex(6)
     else
-      key, _ = query_params.first
+      # Check for custom placement marker first and if not found,
+      # use key of the first query parameter.
+      key, _ = query_params.find { |_, v| v == "*" } || query_params.first
     end
 
     query_params[key] = payload
