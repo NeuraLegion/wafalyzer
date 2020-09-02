@@ -1,6 +1,6 @@
 module Wafalyzer
-  class Waf::ApacheGeneric < Waf
-    product "Apache Generic"
+  class Waf::Apache < Waf
+    product "Apache Generic Protection"
 
     PATTERN =
       Regex.union(
@@ -12,7 +12,7 @@ module Wafalyzer
       )
 
     matches_status :forbidden
-    matches_header "Server", /apache/i
+    matches_header "Server", PATTERN
     matches_body PATTERN
   end
 end

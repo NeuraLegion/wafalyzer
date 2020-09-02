@@ -10,7 +10,7 @@ module Wafalyzer
         /cf[-|_]ray(..)?([0-9a-f]{16})?[-|_]?(dfw|iad)?/i,
         /.>attention.required!.\|.cloudflare<.+/i,
         /http(s)?.\/\/report.(uri.)?cloudflare.com(\/cdn.cgi(.beacon\/expect.ct)?)?/i,
-        /ray.id/i
+        /ray.id/i,
       )
 
     matches_header %w(CF-Cache-Status CF-Ray CF-Request-ID)
