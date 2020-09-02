@@ -4,7 +4,10 @@ module Wafalyzer
     class_property timeout : Time::Span?
 
     # No. of additional iterations (after 1st failed request).
-    class_property fallback_requests_count = 3
+    #
+    # NOTE: Setting it to `nil` is equivalent to using `payloads.size`,
+    # i.e. there will as many request as available payloads.
+    class_property fallback_requests_count : Int32?
 
     # Array of parameter payloads, injected for fallback requests.
     class_property payloads : Array(String) { SupportFS.payloads }

@@ -103,22 +103,24 @@ module Wafalyzer
       detect_single(uri, method, headers, body, user_agent)
 
     if detected.empty?
+      samples = settings.payloads
       # We need to sample our payloads upfront, in order to
       # guarantee their uniqueness, and prevent potential
       # duplicates when sampling on per-request basis
-      settings.payloads
-        .sample(settings.fallback_requests_count)
-        .each do |sample|
-          mutated_uri = mutate_uri(uri, sample)
+      if sample_count = settings.fallback_requests_count
+        samples = samples.sample(sample_count)
+      end
+      samples.each do |sample|
+        mutated_uri = mutate_uri(uri, sample)
 
-          detected =
-            detect_single(mutated_uri, method, headers, body, user_agent)
+        detected =
+          detect_single(mutated_uri, method, headers, body, user_agent)
 
-          break unless detected.empty?
-        rescue
-          # Exceptions are being handled within the
-          # `detect_single` method call above
-        end
+        break unless detected.empty?
+      rescue
+        # Exceptions are being handled within the
+        # `detect_single` method call above
+      end
     end
     detected
   end
