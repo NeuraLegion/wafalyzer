@@ -101,6 +101,9 @@ module Wafalyzer
   def detect(uri : URI, method : String = "GET", headers : HTTP::Headers? = nil, body : HTTP::Client::BodyType? = nil, user_agent : String? = nil) : Array(Waf)
     user_agent ||= settings.user_agent
 
+    Log.debug &.emit("Starting detection", {
+      user_agent: user_agent,
+    })
     detected =
       detect_single(uri, method, headers, body, user_agent)
 
@@ -115,6 +118,9 @@ module Wafalyzer
       samples.each do |sample|
         mutated_uri = mutate_uri(uri, sample)
 
+        Log.debug &.emit("Issuing another HTTP request", {
+          payload: sample,
+        })
         detected =
           detect_single(mutated_uri, method, headers, body, user_agent)
 

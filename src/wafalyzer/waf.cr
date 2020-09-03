@@ -7,9 +7,6 @@ module Wafalyzer
   abstract class Waf
     macro inherited
       {% unless @type.abstract? %}
-        Log.debug {
-          "Adding {{ @type }} to the list of wafs"
-        }
         ::Wafalyzer.wafs << new
       {% end %}
     end
