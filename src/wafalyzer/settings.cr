@@ -3,6 +3,9 @@ module Wafalyzer
     # Timeout being used for requests.
     class_property timeout : Time::Span?
 
+    # Maximum number of subsequent redirections.
+    class_property redirection_limit = 7
+
     # No. of additional iterations (after 1st failed request).
     #
     # NOTE: Setting it to `nil` is equivalent to using `payloads.size`,

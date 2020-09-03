@@ -70,6 +70,36 @@ module Wafalyzer
     raise ex
   end
 
+  private def exec_request_with_redirections(uri : URI, method : String, headers : HTTP::Headers?, body : HTTP::Client::BodyType?, user_agent : String?) : {URI, HTTP::Client::Response}
+    response = nil
+    i = 0
+
+    loop do
+      response =
+        exec_request(uri, method, headers, body, user_agent)
+
+      break unless response.status.redirection?
+
+      if i >= settings.redirection_limit
+        Log.warn { "Reached the redirection limit, bailing" }
+        break
+      end
+      unless location = response.headers["Location"]?.presence
+        Log.warn { %(Redirection response with no (or empty) "Location" header, bailing) }
+        break
+      end
+
+      uri = uri.resolve(location)
+
+      Log.debug &.emit("Following redirection response", {
+        url: uri.to_s,
+      })
+
+      i += 1
+    end
+    {uri, response.not_nil!}
+  end
+
   private def mutate_uri(uri : URI, payload : String) : URI
     query_params = uri.query_params
 
@@ -87,14 +117,15 @@ module Wafalyzer
       .tap(&.query = query_params.to_s)
   end
 
-  private def detect_single(uri : URI, method : String, headers : HTTP::Headers?, body : HTTP::Client::BodyType?, user_agent : String?) : Array(Waf)
-    response = exec_request(uri, method, headers, body, user_agent)
+  private def detect_single(uri : URI, method : String, headers : HTTP::Headers?, body : HTTP::Client::BodyType?, user_agent : String?) : {URI, Array(Waf)}
+    uri, response =
+      exec_request_with_redirections(uri, method, headers, body, user_agent)
 
-    wafs.select(&.matches?(response)).tap do |detected|
-      Log.debug {
-        "Detected wafs: %s" % detected.inspect
-      }
-    end
+    detected = wafs.select(&.matches?(response))
+    Log.debug {
+      "Detected wafs: %s" % detected.inspect
+    }
+    {uri, detected}
   end
 
   # Returns an array of `Waf`s detected for the given request.
@@ -104,7 +135,7 @@ module Wafalyzer
     Log.debug &.emit("Starting detection", {
       user_agent: user_agent,
     })
-    detected =
+    uri, detected =
       detect_single(uri, method, headers, body, user_agent)
 
     if detected.empty?
@@ -121,7 +152,7 @@ module Wafalyzer
         Log.debug &.emit("Issuing another HTTP request", {
           payload: sample,
         })
-        detected =
+        _, detected =
           detect_single(mutated_uri, method, headers, body, user_agent)
 
         break unless detected.empty?
