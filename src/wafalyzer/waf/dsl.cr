@@ -55,9 +55,68 @@ module Wafalyzer
       names.each { |name| matches_header name, value }
     end
 
-    # :ditto:
+    # Declares `self` as matching if any of the given headers
+    # is not empty.
+    #
+    # ```
+    # class Waf::Foo < Waf
+    #   # asserts that "X-Foo" header is not empty
+    #   matches_header "X-Foo"
+    #
+    #   # same as above, but for multiple headers at once
+    #   matches_header %w(X-Foo X-Bar X-Baz)
+    # end
+    # ```
+    #
+    # NOTE: Additive - calling this method multiple times
+    # will create an union with the already existing value.
     def self.matches_header(name : String | Enumerable(String))
       matches_header name, /.+/
+    end
+
+    # Declares `self` as matching if any of the given headers'
+    # keys matches the given *value*.
+    #
+    # ```
+    # class Waf::Foo < Waf
+    #   matches_any_header_key /X-Foo-\d+/i
+    # end
+    # ```
+    #
+    # NOTE: Additive - calling this method multiple times
+    # will create an union with the already existing value.
+    def self.matches_any_header_key(value : Regex | String)
+      matches_header "*any-key*", value
+    end
+
+    # Declares `self` as matching if any of the given headers'
+    # values matches the given *value*.
+    #
+    # ```
+    # class Waf::Foo < Waf
+    #   matches_any_header_value "waf.foo.com"
+    # end
+    # ```
+    #
+    # NOTE: Additive - calling this method multiple times
+    # will create an union with the already existing value.
+    def self.matches_any_header_value(value : Regex | String)
+      matches_header "*any-value*", value
+    end
+
+    # Declares `self` as matching if any of the given headers'
+    # keys OR values matches given *value*.
+    #
+    # ```
+    # class Waf::Foo < Waf
+    #   matches_any_header /SuperToughWaf/i
+    # end
+    # ```
+    #
+    # NOTE: Additive - calling this method multiple times
+    # will create an union with the already existing value.
+    def self.matches_any_header(value : Regex | String)
+      matches_header "*any-key-value*", value
     end
 
     @@body : Regex?
