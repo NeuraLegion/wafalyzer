@@ -104,7 +104,7 @@ module Wafalyzer
     query_params = uri.query_params
 
     if query_params.empty?
-      key = "_%s" % Random::Secure.hex(6)
+      key = "_" + Random::Secure.hex(6)
     else
       # Check for custom placement marker first and if not found,
       # use key of the first query parameter.
