@@ -18,14 +18,14 @@ module Wafalyzer
     #
     # ```
     # class Waf::Foo < Waf
-    #   # partial match, case sensitive
+    #   # exact match, case sensitive
     #   matches_header "Server", "Apache"
-    #
-    #   # partial match, case insensitive
-    #   matches_header "Server", /apache/i
     #
     #   # exact match, case insensitive
     #   matches_header "Server", /^apache$/i
+    #
+    #   # partial match, case insensitive
+    #   matches_header "Server", /apache/i
     #
     #   # asserts the pattern for multiple headers at once
     #   matches_header %w(Cookie Set-Cookie), /__unique_id/
@@ -47,7 +47,7 @@ module Wafalyzer
 
     # :ditto:
     def self.matches_header(name : String, value : String)
-      matches_header name, Regex.new(Regex.escape(value))
+      matches_header name, Regex.new("\\A#{Regex.escape(value)}\\z")
     end
 
     # :ditto:
