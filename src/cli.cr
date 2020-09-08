@@ -2,26 +2,18 @@ require "baked_file_system"
 require "option_parser"
 require "climate"
 require "./wafalyzer"
+require "./cli/*"
 
-class Wafalyzer::SupportFS
-  extend BakedFileSystem
-
-  bake_folder "./support"
-
-  def self.read_file(path : String | Path) : String
-    get(path.to_s).gets_to_end
-  end
-end
-
-protected def fail(message : String? = nil)
+private def fail(message : String? = nil)
   if message = message.presence
     message = "!Error¡: #{message}"
   end
   abort(message.try(&.climatize))
 end
 
-Log
-  .setup_from_env
+Log.setup_from_env(
+  backend: Log::IOBackend.new(formatter: Wafalyzer::CLI::LogFormatter)
+)
 
 Colorize
   .on_tty_only!
