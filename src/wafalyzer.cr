@@ -52,7 +52,7 @@ module Wafalyzer
     })
 
     client uri, &.exec(method, uri.full_path, headers, body).tap do |response|
-      Log.debug &.emit("HTTP response received", {
+      Log.debug &.emit("Received HTTP response", {
         status_code: response.status.code,
         headers:     response.headers.to_h,
       })
@@ -130,7 +130,11 @@ module Wafalyzer
 
     detected = wafs.select(&.matches?(response))
     Log.debug {
-      "Detected wafs: %s" % detected.inspect
+      if detected.empty?
+        "No WAFs detected"
+      else
+        "Detected WAFs: %s" % detected.inspect
+      end
     }
     {uri, detected}
   end

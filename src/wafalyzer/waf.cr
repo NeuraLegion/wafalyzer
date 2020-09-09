@@ -5,6 +5,8 @@ module Wafalyzer
   class_property wafs = [] of Waf
 
   abstract class Waf
+    Log = ::Log.for(self)
+
     macro inherited
       {% unless @type.abstract? %}
         ::Wafalyzer.wafs << new
@@ -42,27 +44,71 @@ module Wafalyzer
         case name
         when "*any-key*"
           headers.each do |key, _|
-            return true if key.matches?(pattern)
+            if key =~ pattern
+              Log.debug &.emit("Found *any-key* header match", {
+                key:     key,
+                pattern: pattern.to_s,
+                matches: $~.to_a,
+              })
+              return true
+            end
           end
         when "*any-value*"
-          headers.each do |_, values|
-            return true if values.any?(&.matches?(pattern))
+          headers.each do |key, values|
+            if value = values.find(&.=~(pattern))
+              Log.debug &.emit("Found *any-value* header match", {
+                key:     key,
+                value:   value,
+                pattern: pattern.to_s,
+                matches: $~.to_a,
+              })
+              return true
+            end
           end
         when "*any-key-value*"
           headers.each do |key, values|
-            return true if key.matches?(pattern)
-            return true if values.any?(&.matches?(pattern))
+            if key =~ pattern
+              Log.debug &.emit("Found *any-key-value* header key match", {
+                key:     key,
+                pattern: pattern.to_s,
+                matches: $~.to_a,
+              })
+              return true
+            end
+            if value = values.find(&.=~(pattern))
+              Log.debug &.emit("Found *any-key-value* header value match", {
+                key:     key,
+                value:   value,
+                pattern: pattern.to_s,
+                matches: $~.to_a,
+              })
+              return true
+            end
           end
         else
-          return true if headers[name]? =~ pattern
+          if (value = headers[name]?) =~ pattern
+            Log.debug &.emit("Found header match", {
+              key:     name,
+              value:   value,
+              pattern: pattern.to_s,
+              matches: $~.to_a,
+            })
+            return true
+          end
         end
       end
       false
     end
 
     protected def matches_body?(response : HTTP::Client::Response) : Bool
-      @@body.try do |body|
-        return true if response.body? =~ body
+      @@body.try do |pattern|
+        if response.body? =~ pattern
+          Log.debug &.emit("Found body match", {
+            pattern: pattern.to_s,
+            matches: $~.to_a,
+          })
+          return true
+        end
       end
       false
     end
