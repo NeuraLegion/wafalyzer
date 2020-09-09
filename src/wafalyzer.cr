@@ -89,8 +89,15 @@ module Wafalyzer
         break
       end
 
-      uri = uri.resolve(location)
+      next_uri = uri.resolve(location)
+      if next_uri == uri
+        Log.warn &.emit("Redirection loop, bailing", {
+          url: uri.to_s,
+        })
+        break
+      end
 
+      uri = next_uri
       Log.debug &.emit("Following redirection response", {
         url: uri.to_s,
       })
