@@ -11,6 +11,31 @@ module Wafalyzer
     delegate :product, :product?,
       to: self.class
 
+    @@status = [] of HTTP::Status
+
+    # Declaration that returned HTTP status must match
+    # the given *status*, otherwise rest of the rules
+    # are ignored.
+    #
+    # ```
+    # class Waf::Foo < Waf
+    #   valid_status :forbidden
+    #   # or
+    #   valid_status 403
+    # end
+    # ```
+    #
+    # NOTE: Additive - calling this method multiple times
+    # will match on ANY of the added values.
+    def self.valid_status(status : HTTP::Status)
+      @@status << status
+    end
+
+    # :ditto:
+    def self.valid_status(code : Int32)
+      valid_status HTTP::Status.new(code)
+    end
+
     @@headers = {} of String => Regex
 
     # Declaration that returned HTTP response header *name*
@@ -135,26 +160,6 @@ module Wafalyzer
     def self.matches_body(value : Regex)
       @@body =
         @@body.try(&.+(value)) || value
-    end
-
-    @@status : HTTP::Status?
-
-    # Declaration that returned HTTP status must match
-    # the given *status*.
-    #
-    # ```
-    # class Waf::Foo < Waf
-    #   matches_status :forbidden
-    #   # or
-    #   matches_status 403
-    # end
-    # ```
-    def self.matches_status(@@status : HTTP::Status)
-    end
-
-    # :ditto:
-    def self.matches_status(code : Int32)
-      matches_status HTTP::Status.new(code)
     end
   end
 end

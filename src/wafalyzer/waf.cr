@@ -24,17 +24,14 @@ module Wafalyzer
     # Returns `true` if given *response* matches defined
     # assertions, `false` otherwise.
     def matches?(response : HTTP::Client::Response) : Bool
-      return false unless matches_status?(response)
+      return false unless valid_status?(response)
       return true if matches_headers?(response)
       return true if matches_body?(response)
       false
     end
 
-    protected def matches_status?(response : HTTP::Client::Response) : Bool
-      @@status.try do |status|
-        return response.status == status
-      end
-      true
+    protected def valid_status?(response : HTTP::Client::Response) : Bool
+      @@status.empty? || @@status.any?(&.==(response.status))
     end
 
     protected def matches_headers?(response : HTTP::Client::Response) : Bool

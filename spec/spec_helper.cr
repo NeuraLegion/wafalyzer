@@ -27,7 +27,7 @@ module Wafalyzer
   class Waf::SuperToughWaf < Waf
     product "***"
 
-    matches_status :forbidden
+    valid_status :forbidden
     matches_header %w(Server Cookies Set-Cookie), /__s0m00cht0ugh/
   end
 end

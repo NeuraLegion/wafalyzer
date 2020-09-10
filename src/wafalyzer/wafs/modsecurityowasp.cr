@@ -8,7 +8,7 @@ module Wafalyzer
         /additionally\S.a.406.not.acceptable/i,
       )
 
-    matches_status :not_acceptable
+    valid_status :not_acceptable
     matches_body PATTERN
   end
 end
