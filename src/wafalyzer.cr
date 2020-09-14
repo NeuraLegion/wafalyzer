@@ -80,10 +80,11 @@ module Wafalyzer
 
       break unless response.status.redirection?
 
-      if i >= settings.redirection_limit
+      unless i < settings.redirection_limit
         Log.warn { "Reached the redirection limit, bailing" }
         break
       end
+
       unless location = response.headers["Location"]?.presence
         Log.warn { %(Redirection response with no (or empty) "Location" header, bailing) }
         break
@@ -104,6 +105,7 @@ module Wafalyzer
 
       i += 1
     end
+
     {uri, response.not_nil!}
   end
 

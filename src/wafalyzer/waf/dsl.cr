@@ -4,8 +4,7 @@ module Wafalyzer
     class_property! product : String
 
     # :ditto:
-    def self.product(value : String)
-      @@product = value
+    def self.product(@@product)
     end
 
     delegate :product, :product?,
