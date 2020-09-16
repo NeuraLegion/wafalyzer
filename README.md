@@ -1,4 +1,4 @@
-# wafalyzer [![Build Status](https://travis-ci.com/Sija/wafalyzer.svg?branch=master)](https://travis-ci.com/Sija/wafalyzer) [![Releases](https://img.shields.io/github/release/Sija/wafalyzer.svg)](https://github.com/Sija/wafalyzer/releases) [![License](https://img.shields.io/github/license/Sija/wafalyzer.svg)](https://github.com/Sija/wafalyzer/blob/master/LICENSE)
+# wafalyzer [![Build Status](https://travis-ci.com/NeuraLegion/wafalyzer.svg?branch=master)](https://travis-ci.com/NeuraLegion/wafalyzer) [![Releases](https://img.shields.io/github/release/NeuraLegion/wafalyzer.svg)](https://github.com/NeuraLegion/wafalyzer/releases) [![License](https://img.shields.io/github/license/NeuraLegion/wafalyzer.svg)](https://github.com/NeuraLegion/wafalyzer/blob/master/LICENSE)
 
 Wafalyzer is a firewall detection utility, which attempts to determine what WAF (if any) is in the front of a web application. It does that by means of passive analysis of the HTTP response metadata (status, headers, body) and if that fails, issuing additional requests with popular malicious payloads in order to (eventually) trigger WAF's response.
 
@@ -11,7 +11,7 @@ Wafalyzer is a firewall detection utility, which attempts to determine what WAF 
    ```yaml
    dependencies:
      wafalyzer:
-       github: Sija/wafalyzer
+       github: NeuraLegion/wafalyzer
    ```
 
 2. Run `shards install`
@@ -72,7 +72,7 @@ crystal spec
 
 ## Contributing
 
-1. Fork it (<https://github.com/Sija/wafalyzer/fork>)
+1. Fork it (<https://github.com/NeuraLegion/wafalyzer/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
