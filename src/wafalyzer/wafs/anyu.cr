@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Anyu < Waf
-    product "AnYu Web Application Firewall (Anyu Technologies)"
+    register product: "AnYu Web Application Firewall (Anyu Technologies)"
 
     PATTERN =
       Regex.union(

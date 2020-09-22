@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::ShadowDaemon < Waf
-    product "Shadow Daemon Opensource (WAF)"
+    register product: "Shadow Daemon Opensource (WAF)"
 
     PATTERN =
       Regex.union(

@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Bekchy < Waf
-    product "Bekchy (WAF)"
+    register product: "Bekchy (WAF)"
 
     PATTERN =
       Regex.union(

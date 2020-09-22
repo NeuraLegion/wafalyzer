@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Instart < Waf
-    product "Instart Logic (Palo Alto)"
+    register product: "Instart Logic (Palo Alto)"
 
     PATTERN =
       /instartrequestid/i

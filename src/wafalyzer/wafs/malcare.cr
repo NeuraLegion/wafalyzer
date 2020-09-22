@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::MalCare < Waf
-    product "MalCare (MalCare Security WAF)"
+    register product: "MalCare (MalCare Security WAF)"
 
     PATTERN =
       Regex.union(

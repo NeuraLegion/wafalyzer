@@ -130,7 +130,7 @@ module Wafalyzer
     uri, response =
       exec_request_with_redirections(uri, method, headers, body, user_agent)
 
-    detected = wafs.select(&.matches?(response))
+    detected = Waf.detect(response)
     Log.debug {
       if detected.empty?
         "No WAFs detected"

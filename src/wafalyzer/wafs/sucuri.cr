@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Sucuri < Waf
-    product "Sucuri Firewall (Sucuri Cloudproxy)"
+    register product: "Sucuri Firewall (Sucuri Cloudproxy)"
 
     PATTERN =
       Regex.union(

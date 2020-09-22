@@ -1,24 +1,53 @@
 require "./waf/*"
 
 module Wafalyzer
-  # Array of loaded `Waf` profiles
-  class_property wafs = [] of Waf
-
   abstract class Waf
     Log = ::Log.for(self)
 
-    macro inherited
-      {% unless @type.abstract? %}
-        ::Wafalyzer.wafs << new
-      {% end %}
+    # Array of loaded `Waf` profiles
+    class_property instances = {} of Waf.class => Waf
+
+    # Returns an array of `Waf` profiles matching the given *response*.
+    def self.detect(response : HTTP::Client::Response) : Array(Waf)
+      Waf.instances.each_with_object([] of Waf) do |(_, waf), matches|
+        matches << waf if waf.matches?(response)
+      end
+    end
+
+    # Registers `self` with given properties.
+    #
+    # ```
+    # class Waf::Foo < Waf
+    #   register product: "Foo WAF"
+    # end
+    # ```
+    def self.register(*args, **kwargs)
+      Waf.instances[self] = new(*args, **kwargs)
+    end
+
+    def self.find?(klass : Waf.class) : Waf?
+      Waf.instances[klass]?
+    end
+
+    def self.find(klass : Waf.class) : Waf
+      find?(klass) ||
+        raise ArgumentError.new("Cannot find the Waf instance for given class #{klass}")
+    end
+
+    def self.instance? : Waf?
+      find?(self)
+    end
+
+    def self.instance : Waf
+      find(self)
     end
 
     def to_s(io : IO) : Nil
-      io << product?
+      io << product
     end
 
     def to_json(json : JSON::Builder)
-      {product: product?}.to_json(json)
+      {product: product}.to_json(json)
     end
 
     # Returns `true` if given *response* matches defined

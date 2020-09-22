@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::SiteGuard < Waf
-    product "SiteGuard Lite (Wordpress WAF)"
+    register product: "SiteGuard Lite (Wordpress WAF)"
 
     PATTERN =
       Regex.union(

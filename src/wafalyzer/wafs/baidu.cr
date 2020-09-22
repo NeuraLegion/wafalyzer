@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Baidu < Waf
-    product "Yunjiasu Web Application Firewall (Baidu)"
+    register product: "Yunjiasu Web Application Firewall (Baidu)"
 
     PATTERN =
       Regex.union(

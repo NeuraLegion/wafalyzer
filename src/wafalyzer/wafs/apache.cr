@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Apache < Waf
-    product "Apache Generic Protection"
+    register product: "Apache Generic Protection"
 
     PATTERN =
       Regex.union(

@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Comodo < Waf
-    product "Comodo Web Application Firewall (Comodo)"
+    register product: "Comodo Web Application Firewall (Comodo)"
 
     PATTERN =
       /protected.by.comodo.waf/i

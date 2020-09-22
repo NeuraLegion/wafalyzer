@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::FortiGate < Waf
-    product "FortiWeb Web Application Firewall (Fortinet)"
+    register product: "FortiWeb Web Application Firewall (Fortinet)"
 
     PATTERN =
       Regex.union(

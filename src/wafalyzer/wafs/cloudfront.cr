@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::CloudFront < Waf
-    product "CloudFront Firewall (Amazon)"
+    register product: "CloudFront Firewall (Amazon)"
 
     PATTERN =
       Regex.union(

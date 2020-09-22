@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Stackpath < Waf
-    product "Stackpath WAF (StackPath)"
+    register product: "Stackpath WAF (StackPath)"
 
     PATTERN =
       Regex.union(

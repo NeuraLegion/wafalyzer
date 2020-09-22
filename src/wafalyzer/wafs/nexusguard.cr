@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::NexusGuard < Waf
-    product "NexusGuard Security (WAF)"
+    register product: "NexusGuard Security (WAF)"
 
     PATTERN =
       Regex.union(

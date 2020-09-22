@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::GreyWizard < Waf
-    product "Grey Wizard Protection"
+    register product: "Grey Wizard Protection"
 
     PATTERN =
       Regex.union(

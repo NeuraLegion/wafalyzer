@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Viettel < Waf
-    product "Viettel WAF (Cloudrity)"
+    register product: "Viettel WAF (Cloudrity)"
 
     PATTERN =
       Regex.union(

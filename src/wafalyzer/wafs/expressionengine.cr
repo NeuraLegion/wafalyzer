@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::ExpressionEngine < Waf
-    product "ExpressionEngine (Ellislab WAF)"
+    register product: "ExpressionEngine (Ellislab WAF)"
 
     PATTERN =
       Regex.union(

@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::PKSecurityModule < Waf
-    product "pkSecurityModule (IDS)"
+    register product: "pkSecurityModule (IDS)"
 
     PATTERN =
       Regex.union(

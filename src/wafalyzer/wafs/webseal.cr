@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::WebSEAL < Waf
-    product "IBM Security Access Manager (WebSEAL)"
+    register product: "IBM Security Access Manager (WebSEAL)"
 
     PATTERN =
       Regex.union(

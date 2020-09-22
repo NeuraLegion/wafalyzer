@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Armor < Waf
-    product "Armor Protection (Armor Defense)"
+    register product: "Armor Protection (Armor Defense)"
 
     PATTERN =
       Regex.union(

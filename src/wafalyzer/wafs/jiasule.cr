@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Jiasule < Waf
-    product "Jiasule (WAF)"
+    register product: "Jiasule (WAF)"
 
     PATTERN =
       Regex.union(

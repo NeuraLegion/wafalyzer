@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::BigIP < Waf
-    product "BIG-IP (F5 Networks)"
+    register product: "BIG-IP (F5 Networks)"
 
     PATTERN =
       Regex.union(

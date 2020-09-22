@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Varnish < Waf
-    product "Varnish/CacheWall WAF"
+    register product: "Varnish/CacheWall WAF"
 
     PATTERN =
       Regex.union(

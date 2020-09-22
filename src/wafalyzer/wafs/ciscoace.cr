@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::CiscoACE < Waf
-    product "Cisco ACE XML Firewall (Cisco)"
+    register product: "Cisco ACE XML Firewall (Cisco)"
 
     PATTERN =
       /ace.xml.gateway/i

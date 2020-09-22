@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Wordfence < Waf
-    product "Wordfence (Feedjit)"
+    register product: "Wordfence (Feedjit)"
 
     PATTERN =
       Regex.union(

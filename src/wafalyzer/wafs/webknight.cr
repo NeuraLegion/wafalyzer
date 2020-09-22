@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::WebKnight < Waf
-    product "WebKnight Application Firewall (AQTRONIX)"
+    register product: "WebKnight Application Firewall (AQTRONIX)"
 
     PATTERN =
       /webknight/i

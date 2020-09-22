@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Yunsuo < Waf
-    product "Yunsuo Web Application Firewall (Yunsuo)"
+    register product: "Yunsuo Web Application Firewall (Yunsuo)"
 
     PATTERN =
       Regex.union(

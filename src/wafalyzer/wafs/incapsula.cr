@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Incapsula < Waf
-    product "Incapsula Web Application Firewall (Incapsula/Imperva)"
+    register product: "Incapsula Web Application Firewall (Incapsula/Imperva)"
 
     PATTERN =
       Regex.union(

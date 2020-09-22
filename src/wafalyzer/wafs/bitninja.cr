@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::BitNinja < Waf
-    product "BitNinja (WAF)"
+    register product: "BitNinja (WAF)"
 
     PATTERN =
       Regex.union(

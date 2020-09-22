@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::WatchGuard < Waf
-    product "WatchGuard WAF"
+    register product: "WatchGuard WAF"
 
     PATTERN =
       Regex.union(

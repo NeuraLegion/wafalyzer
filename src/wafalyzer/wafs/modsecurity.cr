@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::ModSecurity < Waf
-    product "Open Source Web Application Firewall (ModSecurity)"
+    register product: "Open Source Web Application Firewall (ModSecurity)"
 
     PATTERN =
       Regex.union(

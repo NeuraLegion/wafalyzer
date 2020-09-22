@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::SonicWALL < Waf
-    product "SonicWALL Firewall (Dell)"
+    register product: "SonicWALL Firewall (Dell)"
 
     PATTERN =
       Regex.union(

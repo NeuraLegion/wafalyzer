@@ -1,8 +1,8 @@
 require "./spec_helper"
 
 Spectator.describe Wafalyzer do
-  let(wafs) { subject.wafs }
-  let(tough_waf) { wafs.find(&.class.==(Wafalyzer::Waf::ToughWaf)) }
+  let(wafs) { Wafalyzer::Waf.instances }
+  let(tough_waf) { wafs[Wafalyzer::Waf::ToughWaf] }
   let(tough_waf_server) do
     HTTP::Server.new do |context|
       context.response
@@ -14,10 +14,9 @@ Spectator.describe Wafalyzer do
 
   describe ".wafs" do
     it "return an array of all loaded Waf classes" do
-      expect(wafs).to be_a(Array(Wafalyzer::Waf))
+      expect(wafs).to be_a(Hash(Wafalyzer::Waf.class, Wafalyzer::Waf))
       expect(wafs).to_not be_empty
       expect(tough_waf).to_not be_nil
-      expect(wafs).to contain(tough_waf)
     end
   end
 

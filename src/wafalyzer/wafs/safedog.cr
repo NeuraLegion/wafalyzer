@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::SafeDog < Waf
-    product "SafeDog WAF (SafeDog)"
+    register product: "SafeDog WAF (SafeDog)"
 
     PATTERN =
       Regex.union(

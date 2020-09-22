@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::West236 < Waf
-    product "West236 Firewall"
+    register product: "West236 Firewall"
 
     PATTERN =
       /wt\d*cdn/i

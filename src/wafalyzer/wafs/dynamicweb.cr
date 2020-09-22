@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::DynamicWeb < Waf
-    product "DynamicWeb Injection Check (DynamicWeb)"
+    register product: "DynamicWeb Injection Check (DynamicWeb)"
 
     PATTERN =
       /dw.inj.check/i

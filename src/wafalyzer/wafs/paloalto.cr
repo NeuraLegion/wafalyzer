@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::PaloAlto < Waf
-    product "Palo Alto Firewall (Palo Alto Networks)"
+    register product: "Palo Alto Firewall (Palo Alto Networks)"
 
     PATTERN =
       Regex.union(

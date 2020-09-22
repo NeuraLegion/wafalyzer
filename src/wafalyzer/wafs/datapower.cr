@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::DataPower < Waf
-    product "IBM Websphere DataPower Firewall (IBM)"
+    register product: "IBM Websphere DataPower Firewall (IBM)"
 
     PATTERN =
       /\A(ok|fail)/i

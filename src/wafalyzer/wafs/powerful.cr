@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Powerful < Waf
-    product "Powerful Firewall (MyBB plugin)"
+    register product: "Powerful Firewall (MyBB plugin)"
 
     PATTERN =
       Regex.union(

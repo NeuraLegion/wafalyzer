@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Zscaler < Waf
-    product "Zscaler Cloud Firewall (WAF)"
+    register product: "Zscaler Cloud Firewall (WAF)"
 
     PATTERN =
       Regex.union(

@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::CloudFlare < Waf
-    product "CloudFlare Web Application Firewall (CloudFlare)"
+    register product: "CloudFlare Web Application Firewall (CloudFlare)"
 
     PATTERN =
       Regex.union(

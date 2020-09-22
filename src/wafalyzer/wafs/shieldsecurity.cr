@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::ShieldSecurity < Waf
-    product "Shield Security"
+    register product: "Shield Security"
 
     PATTERN =
       Regex.union(

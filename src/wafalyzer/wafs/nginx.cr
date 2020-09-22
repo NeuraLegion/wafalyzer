@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Nginx < Waf
-    product "Nginx Generic Protection"
+    register product: "Nginx Generic Protection"
 
     PATTERN =
       Regex.union(

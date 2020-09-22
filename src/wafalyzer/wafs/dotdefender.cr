@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::DotDefender < Waf
-    product "dotDefender (Applicure Technologies)"
+    register product: "dotDefender (Applicure Technologies)"
 
     PATTERN =
       /dotdefender.blocked.your.request/i

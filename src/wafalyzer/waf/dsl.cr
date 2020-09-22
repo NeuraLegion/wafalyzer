@@ -1,14 +1,10 @@
 module Wafalyzer
   abstract class Waf
     # Full name of the WAF solution being defined
-    class_property! product : String
+    property product : String
 
-    # :ditto:
-    def self.product(@@product)
+    def initialize(@product)
     end
-
-    delegate :product, :product?,
-      to: self.class
 
     @@status = [] of HTTP::Status
 

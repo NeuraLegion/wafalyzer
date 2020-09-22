@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Infosafe < Waf
-    product "INFOSAFE by http://7i24.com"
+    register product: "INFOSAFE by http://7i24.com"
 
     PATTERN =
       Regex.union(

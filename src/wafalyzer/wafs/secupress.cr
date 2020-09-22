@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::SecuPress < Waf
-    product "SecuPress (Wordpress WAF)"
+    register product: "SecuPress (Wordpress WAF)"
 
     PATTERN =
       Regex.union(

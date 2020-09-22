@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Barikode < Waf
-    product "Barikode Web Application Firewall"
+    register product: "Barikode Web Application Firewall"
 
     PATTERN =
       Regex.union(

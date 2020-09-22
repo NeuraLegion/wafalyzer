@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Radware < Waf
-    product "Radware (AppWall WAF)"
+    register product: "Radware (AppWall WAF)"
 
     PATTERN =
       Regex.union(

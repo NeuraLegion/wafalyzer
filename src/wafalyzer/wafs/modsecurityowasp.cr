@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::ModSecurityOWASP < Waf
-    product "OWASP ModSecurity Core Rule Set (CRS)"
+    register product: "OWASP ModSecurity Core Rule Set (CRS)"
 
     PATTERN =
       Regex.union(

@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::AeSecure < Waf
-    product "aeSecure (WAF)"
+    register product: "aeSecure (WAF)"
 
     PATTERN =
       /aesecure.denied.png/i

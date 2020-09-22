@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::SecureSphere < Waf
-    product "Imperva SecureSphere"
+    register product: "Imperva SecureSphere"
 
     PATTERN =
       Regex.union(

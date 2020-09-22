@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Waf360 < Waf
-    product "360 Web Application Firewall (360)"
+    register product: "360 Web Application Firewall (360)"
 
     PATTERN =
       Regex.union(

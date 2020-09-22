@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::CodeIgniter < Waf
-    product "XSS/CSRF Filtering Protection (CodeIgniter)"
+    register product: "XSS/CSRF Filtering Protection (CodeIgniter)"
 
     PATTERN =
       /the.uri.you.submitted.has.disallowed.characters/i

@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Barracuda < Waf
-    product "Barracuda Web Application Firewall (Barracuda Networks)"
+    register product: "Barracuda Web Application Firewall (Barracuda Networks)"
 
     PATTERN =
       Regex.union(

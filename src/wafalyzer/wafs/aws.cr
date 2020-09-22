@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::AWS < Waf
-    product "Amazon Web Services Web Application Firewall (Amazon)"
+    register product: "Amazon Web Services Web Application Firewall (Amazon)"
 
     PATTERN =
       Regex.union(

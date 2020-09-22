@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Stingray < Waf
-    product "Stingray Application Firewall (Riverbed/Brocade)"
+    register product: "Stingray Application Firewall (Riverbed/Brocade)"
 
     PATTERN =
       /\AX-Mapping-/i

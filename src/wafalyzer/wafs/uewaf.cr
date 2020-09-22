@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::UEWaf < Waf
-    product "UEWaf (UCloud)"
+    register product: "UEWaf (UCloud)"
 
     PATTERN =
       Regex.union(

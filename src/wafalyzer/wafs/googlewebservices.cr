@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::GoogleWebServices < Waf
-    product "Google Web Services (G-Cloud)"
+    register product: "Google Web Services (G-Cloud)"
 
     PATTERN =
       Regex.union(

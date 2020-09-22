@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Squid < Waf
-    product "Squid Proxy (IDS)"
+    register product: "Squid Proxy (IDS)"
 
     PATTERN =
       Regex.union(

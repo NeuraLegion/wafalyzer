@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::AliYunDun < Waf
-    product "AliYunDun (WAF)"
+    register product: "AliYunDun (WAF)"
 
     PATTERN =
       Regex.union(

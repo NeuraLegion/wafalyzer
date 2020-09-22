@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Xuanwudun < Waf
-    product "Xuanwudun WAF"
+    register product: "Xuanwudun WAF"
 
     PATTERN =
       /class=.(db)?waf.?(-row.)?>/i
