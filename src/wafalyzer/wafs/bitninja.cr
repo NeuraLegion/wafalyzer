@@ -9,6 +9,8 @@ module Wafalyzer
         /.>visitor.anti(\S)?robot.validation<./i,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

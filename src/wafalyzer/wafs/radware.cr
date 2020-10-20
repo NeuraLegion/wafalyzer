@@ -9,6 +9,8 @@ module Wafalyzer
         /with.the.following.case.number.in.its.subject:.\d+./i,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

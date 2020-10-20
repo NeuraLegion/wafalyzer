@@ -8,7 +8,9 @@ module Wafalyzer
         /additionally\S.a.406.not.acceptable/i,
       )
 
-    valid_status :not_acceptable
-    matches_body PATTERN
+    builder do
+      valid_status :not_acceptable
+      matches_body PATTERN
+    end
   end
 end

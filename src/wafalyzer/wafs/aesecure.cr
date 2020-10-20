@@ -5,7 +5,9 @@ module Wafalyzer
     PATTERN =
       /aesecure.denied.png/i
 
-    matches_header "AeSecure-Code"
-    matches_body PATTERN
+    builder do
+      matches_header "AeSecure-Code"
+      matches_body PATTERN
+    end
   end
 end

@@ -11,8 +11,10 @@ module Wafalyzer
         /<title>403 Forbidden<\/title>/i,
       )
 
-    valid_status :forbidden
-    matches_header "Server", PATTERN
-    matches_body PATTERN
+    builder do
+      valid_status :forbidden
+      matches_header "Server", PATTERN
+      matches_body PATTERN
+    end
   end
 end

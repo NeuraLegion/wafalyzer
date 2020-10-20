@@ -13,10 +13,12 @@ module Wafalyzer
         /ray.id/i,
       )
 
-    matches_header %w(CF-Cache-Status CF-Ray CF-Request-ID)
-    matches_header %w(Set-Cookie), /__cfduid/
-    matches_header %w(Expect-CT), /cloudflare/
-    matches_header %w(Server Cookie Set-Cookie Expect-CT), PATTERN
-    matches_body PATTERN
+    builder do
+      matches_header %w(CF-Cache-Status CF-Ray CF-Request-ID)
+      matches_header %w(Set-Cookie), /__cfduid/
+      matches_header %w(Expect-CT), /cloudflare/
+      matches_header %w(Server Cookie Set-Cookie Expect-CT), PATTERN
+      matches_body PATTERN
+    end
   end
 end

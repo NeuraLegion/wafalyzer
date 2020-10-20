@@ -8,6 +8,8 @@ module Wafalyzer
         /x.dis.request.id/i,
       )
 
-    matches_any_header PATTERN
+    builder do
+      matches_any_header PATTERN
+    end
   end
 end

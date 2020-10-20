@@ -5,8 +5,10 @@ module Wafalyzer
     PATTERN =
       /\AX-Mapping-/i
 
-    valid_status :forbidden
-    valid_status :internal_server_error
-    matches_header "Set-Cookie", PATTERN
+    builder do
+      valid_status :forbidden
+      valid_status :internal_server_error
+      matches_header "Set-Cookie", PATTERN
+    end
   end
 end

@@ -11,7 +11,9 @@ module Wafalyzer
         /transfer.is.blocked/i,
       )
 
-    matches_header %w(Server X-Powered-By-360wzb), PATTERN
-    matches_body PATTERN
+    builder do
+      matches_header %w(Server X-Powered-By-360wzb), PATTERN
+      matches_body PATTERN
+    end
   end
 end

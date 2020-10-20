@@ -12,6 +12,8 @@ module Wafalyzer
         /bigipserver/i,
       )
 
-    matches_header %w(Server Set-Cookie Cookie), PATTERN
+    builder do
+      matches_header %w(Server Set-Cookie Cookie), PATTERN
+    end
   end
 end

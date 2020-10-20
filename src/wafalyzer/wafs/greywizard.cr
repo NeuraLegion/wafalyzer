@@ -10,7 +10,9 @@ module Wafalyzer
         /grey.wizard/,
       )
 
-    matches_header %w(GW-Server Server), PATTERN
-    matches_body PATTERN
+    builder do
+      matches_header %w(GW-Server Server), PATTERN
+      matches_body PATTERN
+    end
   end
 end

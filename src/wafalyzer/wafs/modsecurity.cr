@@ -12,6 +12,8 @@ module Wafalyzer
         /blocked.by.mod.security/i,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

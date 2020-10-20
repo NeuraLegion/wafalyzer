@@ -10,7 +10,9 @@ module Wafalyzer
         /(static|www|dynamic).jiasule.(com|net)/i,
       )
 
-    matches_header %w(Server Set-Cookie), PATTERN
-    matches_body PATTERN
+    builder do
+      matches_header %w(Server Set-Cookie), PATTERN
+      matches_body PATTERN
+    end
   end
 end

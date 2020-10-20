@@ -5,7 +5,9 @@ module Wafalyzer
     PATTERN =
       /rejected.by.url.scan/i
 
-    matches_header "Location", PATTERN
-    matches_body PATTERN
+    builder do
+      matches_header "Location", PATTERN
+      matches_body PATTERN
+    end
   end
 end

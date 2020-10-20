@@ -5,6 +5,8 @@ module Wafalyzer
     PATTERN =
       /dxsupport@sabre.com/i
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

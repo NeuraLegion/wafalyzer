@@ -10,8 +10,10 @@ module Wafalyzer
         /http(s)?.\/\/(cdn|supportx.)?sucuri(.net|com)?/i,
       )
 
-    matches_header "X-Sucuri-Block"
-    matches_header "Server", "Sucuri/Cloudproxy"
-    matches_body PATTERN
+    builder do
+      matches_header "X-Sucuri-Block"
+      matches_header "Server", "Sucuri/Cloudproxy"
+      matches_body PATTERN
+    end
   end
 end

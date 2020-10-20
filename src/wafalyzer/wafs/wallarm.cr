@@ -5,6 +5,8 @@ module Wafalyzer
     PATTERN =
       /nginix.wallarm/
 
-    matches_header "Server", PATTERN
+    builder do
+      matches_header "Server", PATTERN
+    end
   end
 end

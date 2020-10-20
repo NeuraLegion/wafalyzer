@@ -8,7 +8,9 @@ module Wafalyzer
         /<Error><Code>AccessDenied<.Code>/i,
       )
 
-    matches_header %w(Server X-Powered-By Set-Cookie), /x.amz.(id.\d+|request.id)/i
-    matches_body PATTERN
+    builder do
+      matches_header %w(Server X-Powered-By Set-Cookie), /x.amz.(id.\d+|request.id)/i
+      matches_body PATTERN
+    end
   end
 end

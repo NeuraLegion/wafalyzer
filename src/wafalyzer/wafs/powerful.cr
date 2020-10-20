@@ -8,7 +8,9 @@ module Wafalyzer
         /http(s)?...tiny.cc.powerful.firewall/i,
       )
 
-    valid_status :forbidden
-    matches_body PATTERN
+    builder do
+      valid_status :forbidden
+      matches_body PATTERN
+    end
   end
 end

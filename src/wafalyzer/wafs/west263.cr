@@ -5,6 +5,8 @@ module Wafalyzer
     PATTERN =
       /wt\d*cdn/i
 
-    matches_header "X-Cache", PATTERN
+    builder do
+      matches_header "X-Cache", PATTERN
+    end
   end
 end

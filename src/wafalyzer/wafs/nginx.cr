@@ -8,6 +8,8 @@ module Wafalyzer
         /you.do(not|n.t)?.have.permission.to.access.this.document/,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

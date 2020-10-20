@@ -9,9 +9,11 @@ module Wafalyzer
         /block(ed)?.by.g.cloud.security.policy.+/i,
       )
 
-    valid_status :bad_request
-    valid_status :too_many_requests
-    valid_status :internal_server_error
-    matches_body PATTERN
+    builder do
+      valid_status :bad_request
+      valid_status :too_many_requests
+      valid_status :internal_server_error
+      matches_body PATTERN
+    end
   end
 end

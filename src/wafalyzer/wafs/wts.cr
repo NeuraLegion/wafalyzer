@@ -5,6 +5,8 @@ module Wafalyzer
     PATTERN =
       /(<title>)?wts.wa(f)?(\w+(\w+(\w+)?)?)?/i
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

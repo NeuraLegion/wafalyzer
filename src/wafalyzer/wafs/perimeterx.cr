@@ -10,6 +10,8 @@ module Wafalyzer
         /(..)?client.perimeterx.*\/[a-zA-Z]{8,15}\/*.*.js/i,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

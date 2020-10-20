@@ -8,6 +8,8 @@ module Wafalyzer
         /(http(s)?:\/\/)(www.)?bekchy.com(\/report)?/i,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

@@ -9,6 +9,8 @@ module Wafalyzer
         /x.amz.cf.id|nguardx/i,
       )
 
-    matches_any_header_value PATTERN
+    builder do
+      matches_any_header_value PATTERN
+    end
   end
 end

@@ -5,6 +5,8 @@ module Wafalyzer
     PATTERN =
       /st8(id|.wa|.wf)?.?(\d+|\w+)?/i
 
-    matches_any_header_value PATTERN
+    builder do
+      matches_any_header_value PATTERN
+    end
   end
 end

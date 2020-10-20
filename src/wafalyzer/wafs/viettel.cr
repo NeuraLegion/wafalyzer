@@ -10,6 +10,8 @@ module Wafalyzer
         /(http(s).\/\/)?cloudrity.com(.vn)?/
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

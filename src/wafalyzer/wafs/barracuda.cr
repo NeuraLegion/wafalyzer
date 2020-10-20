@@ -9,7 +9,9 @@ module Wafalyzer
         /barracuda.networks.{1,2}inc/i,
       )
 
-    matches_header "Set-Cookie", PATTERN
-    matches_body PATTERN
+    builder do
+      matches_header "Set-Cookie", PATTERN
+      matches_body PATTERN
+    end
   end
 end

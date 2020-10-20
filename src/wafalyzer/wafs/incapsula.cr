@@ -9,7 +9,9 @@ module Wafalyzer
         /incapsula.incident.id/i,
       )
 
-    matches_header %w(Set-Cookie X-CDN), PATTERN
-    matches_body PATTERN
+    builder do
+      matches_header %w(Set-Cookie X-CDN), PATTERN
+      matches_body PATTERN
+    end
   end
 end

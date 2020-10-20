@@ -5,6 +5,8 @@ module Wafalyzer
     PATTERN =
       /(http(s)?.\/\/(www.)?)?365cyd.(com|net)/i
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

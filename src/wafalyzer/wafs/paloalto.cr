@@ -8,6 +8,8 @@ module Wafalyzer
         /.>Virus.Spyware.Download.Blocked<./,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

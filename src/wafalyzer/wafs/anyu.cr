@@ -9,7 +9,9 @@ module Wafalyzer
         /anyu-?.the.green.channel/i,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
 
     def matches?(response : HTTP::Client::Response) : Bool
       event_id = response.headers["WZWS-RAY"]?.presence

@@ -8,7 +8,9 @@ module Wafalyzer
         /didiyun/i,
       )
 
-    matches_header "Server", "DiDi-SLB"
-    matches_body PATTERN
+    builder do
+      matches_header "Server", "DiDi-SLB"
+      matches_body PATTERN
+    end
   end
 end

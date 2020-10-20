@@ -9,6 +9,8 @@ module Wafalyzer
         /invalid.get.data/i,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

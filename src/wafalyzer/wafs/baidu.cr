@@ -8,6 +8,8 @@ module Wafalyzer
         /yunjiasu.nginx/i,
       )
 
-    matches_header %w(X-Server Server), PATTERN
+    builder do
+      matches_header %w(X-Server Server), PATTERN
+    end
   end
 end

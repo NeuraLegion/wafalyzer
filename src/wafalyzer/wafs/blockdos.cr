@@ -5,6 +5,8 @@ module Wafalyzer
     PATTERN =
       /blockdos\.net/i
 
-    matches_header "Server", PATTERN
+    builder do
+      matches_header "Server", PATTERN
+    end
   end
 end

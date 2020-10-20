@@ -5,6 +5,8 @@ module Wafalyzer
     PATTERN =
       /\A(ok|fail)/i
 
-    matches_header "X-Backside-Trans", PATTERN
+    builder do
+      matches_header "X-Backside-Trans", PATTERN
+    end
   end
 end

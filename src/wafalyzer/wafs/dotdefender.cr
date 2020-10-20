@@ -5,7 +5,9 @@ module Wafalyzer
     PATTERN =
       /dotdefender.blocked.your.request/i
 
-    matches_header "X-dotDefender-Denied"
-    matches_body PATTERN
+    builder do
+      matches_header "X-dotDefender-Denied"
+      matches_body PATTERN
+    end
   end
 end

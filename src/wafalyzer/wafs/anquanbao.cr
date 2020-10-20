@@ -5,7 +5,9 @@ module Wafalyzer
     PATTERN =
       /.aqb_cc.error./i
 
-    matches_body PATTERN
-    matches_any_header_value PATTERN
+    builder do
+      matches_body PATTERN
+      matches_any_header_value PATTERN
+    end
   end
 end

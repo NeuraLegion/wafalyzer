@@ -8,6 +8,8 @@ module Wafalyzer
         /<h\d{1}>forbidden.access<.h\d{1}>/i,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

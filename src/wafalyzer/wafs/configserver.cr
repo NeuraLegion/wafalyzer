@@ -5,6 +5,8 @@ module Wafalyzer
     PATTERN =
       /.>the.firewall.on.this.server.is.blocking.your.connection.<+/i
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

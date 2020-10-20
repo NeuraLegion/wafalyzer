@@ -9,6 +9,8 @@ module Wafalyzer
         /ats/i,
       )
 
-    matches_header %w(Via Server), PATTERN
+    builder do
+      matches_header %w(Via Server), PATTERN
+    end
   end
 end

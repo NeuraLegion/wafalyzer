@@ -5,6 +5,8 @@ module Wafalyzer
     PATTERN =
       /the.requested.url.was.rejected..please.consult.with.your.administrator./i
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

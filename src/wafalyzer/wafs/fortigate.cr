@@ -16,7 +16,9 @@ module Wafalyzer
         /the.page.cannot.be.displayed..please.contact.[^@]+@[^@]+\.[^@]+.for.additional.information/i,
       )
 
-    matches_header "Set-Cookie", PATTERN
-    matches_body PATTERN
+    builder do
+      matches_header "Set-Cookie", PATTERN
+      matches_body PATTERN
+    end
   end
 end

@@ -9,6 +9,8 @@ module Wafalyzer
         /\bbinarysec\b/i,
       )
 
-    matches_any_header PATTERN
+    builder do
+      matches_any_header PATTERN
+    end
   end
 end

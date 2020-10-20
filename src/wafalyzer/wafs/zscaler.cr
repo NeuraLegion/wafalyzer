@@ -8,7 +8,9 @@ module Wafalyzer
         /zscaler(.\d+(.\d+)?)?/i,
       )
 
-    matches_header "Server", PATTERN
-    matches_body PATTERN
+    builder do
+      matches_header "Server", PATTERN
+      matches_body PATTERN
+    end
   end
 end

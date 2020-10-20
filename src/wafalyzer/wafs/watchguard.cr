@@ -8,7 +8,9 @@ module Wafalyzer
         /watchguard(.technologies(.inc)?)?/i,
       )
 
-    matches_header "Server", /watchguard/i
-    matches_body PATTERN
+    builder do
+      matches_header "Server", /watchguard/i
+      matches_body PATTERN
+    end
   end
 end

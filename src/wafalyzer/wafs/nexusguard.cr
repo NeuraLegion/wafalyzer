@@ -8,6 +8,8 @@ module Wafalyzer
         /((http(s)?:\/\/)?speresources.)?nexusguard.com.wafpage/i,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

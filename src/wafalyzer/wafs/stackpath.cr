@@ -8,6 +8,8 @@ module Wafalyzer
         /<h2>sorry,.you.have.been.blocked.?<.h2>/i,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

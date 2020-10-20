@@ -5,7 +5,9 @@ module Wafalyzer
     PATTERN =
       /dw.inj.check/i
 
-    valid_status :forbidden
-    matches_header "X-403-Status-By", PATTERN
+    builder do
+      valid_status :forbidden
+      matches_header "X-403-Status-By", PATTERN
+    end
   end
 end

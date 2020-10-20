@@ -8,6 +8,8 @@ module Wafalyzer
         /block.id.{1,2}bad.url.contents.<./i,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end
