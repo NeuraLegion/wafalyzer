@@ -51,7 +51,7 @@ module Wafalyzer
     include DSL
 
     # Full name of the WAF solution being defined
-    property product : String
+    getter product : String
 
     def initialize(@product)
       super()
