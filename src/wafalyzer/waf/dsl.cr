@@ -34,12 +34,12 @@ module Wafalyzer
     #
     # NOTE: Additive - calling this method multiple times
     # will match on ANY of the added values.
-    def valid_status(status : HTTP::Status)
+    protected def valid_status(status : HTTP::Status)
       self.valid_status << status
     end
 
     # :ditto:
-    def valid_status(code : Int32)
+    protected def valid_status(code : Int32)
       valid_status HTTP::Status.new(code)
     end
 
@@ -72,18 +72,18 @@ module Wafalyzer
     #
     # NOTE: Additive - calling this method multiple times
     # will create an union with the already existing value.
-    def matches_header(name : String, value : Regex)
+    protected def matches_header(name : String, value : Regex)
       matches_headers[name] =
         matches_headers[name]?.try(&.+(value)) || value
     end
 
     # :ditto:
-    def matches_header(name : String, value : String)
+    protected def matches_header(name : String, value : String)
       matches_header name, Regex.new("\\A#{Regex.escape(value)}\\z")
     end
 
     # :ditto:
-    def matches_header(names : Enumerable(String), value : Regex | String)
+    protected def matches_header(names : Enumerable(String), value : Regex | String)
       names.each { |name| matches_header name, value }
     end
 
@@ -104,7 +104,7 @@ module Wafalyzer
     #
     # NOTE: Additive - calling this method multiple times
     # will create an union with the already existing value.
-    def matches_header(name : String | Enumerable(String))
+    protected def matches_header(name : String | Enumerable(String))
       matches_header name, /.+/
     end
 
@@ -121,7 +121,7 @@ module Wafalyzer
     #
     # NOTE: Additive - calling this method multiple times
     # will create an union with the already existing value.
-    def matches_any_header_key(value : Regex | String)
+    protected def matches_any_header_key(value : Regex | String)
       matches_header "*any-key*", value
     end
 
@@ -138,7 +138,7 @@ module Wafalyzer
     #
     # NOTE: Additive - calling this method multiple times
     # will create an union with the already existing value.
-    def matches_any_header_value(value : Regex | String)
+    protected def matches_any_header_value(value : Regex | String)
       matches_header "*any-value*", value
     end
 
@@ -155,7 +155,7 @@ module Wafalyzer
     #
     # NOTE: Additive - calling this method multiple times
     # will create an union with the already existing value.
-    def matches_any_header(value : Regex | String)
+    protected def matches_any_header(value : Regex | String)
       matches_header "*any-key-value*", value
     end
 
@@ -172,7 +172,7 @@ module Wafalyzer
     #
     # NOTE: Additive - calling this method multiple times
     # will create an union with the already existing value.
-    def matches_body(value : Regex)
+    protected def matches_body(value : Regex)
       self.matches_body =
         matches_body.try(&.+(value)) || value
     end
