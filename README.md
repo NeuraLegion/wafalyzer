@@ -1,4 +1,4 @@
-# wafalyzer [![Build Status](https://travis-ci.com/NeuraLegion/wafalyzer.svg?branch=master)](https://travis-ci.com/NeuraLegion/wafalyzer) [![Releases](https://img.shields.io/github/release/NeuraLegion/wafalyzer.svg)](https://github.com/NeuraLegion/wafalyzer/releases) [![License](https://img.shields.io/github/license/NeuraLegion/wafalyzer.svg)](https://github.com/NeuraLegion/wafalyzer/blob/master/LICENSE)
+# wafalyzer ![Build Status](https://github.com/NeuraLegion/wafalyzer/workflows/CI/badge.svg) [![Releases](https://img.shields.io/github/release/NeuraLegion/wafalyzer.svg)](https://github.com/NeuraLegion/wafalyzer/releases) [![License](https://img.shields.io/github/license/NeuraLegion/wafalyzer.svg)](https://github.com/NeuraLegion/wafalyzer/blob/master/LICENSE)
 
 Wafalyzer is a firewall detection utility, which attempts to determine what WAF (if any) is in the front of a web application. It does that by means of passive analysis of the HTTP response metadata (status, headers, body) and if that fails, issuing additional requests with popular malicious payloads in order to (eventually) trigger WAF's response.
 
