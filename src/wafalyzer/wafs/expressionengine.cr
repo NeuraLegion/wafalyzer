@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::ExpressionEngine < Waf
-    product "ExpressionEngine (Ellislab WAF)"
+    register product: "ExpressionEngine (Ellislab WAF)"
 
     PATTERN =
       Regex.union(
@@ -9,6 +9,8 @@ module Wafalyzer
         /invalid.get.data/i,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

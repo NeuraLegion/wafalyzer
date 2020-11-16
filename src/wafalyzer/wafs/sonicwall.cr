@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::SonicWALL < Waf
-    product "SonicWALL Firewall (Dell)"
+    register product: "SonicWALL Firewall (Dell)"
 
     PATTERN =
       Regex.union(
@@ -11,7 +11,9 @@ module Wafalyzer
         /.>policy.this.site.is.blocked<./i,
       )
 
-    matches_header "Server", PATTERN
-    matches_body PATTERN
+    builder do
+      matches_header "Server", PATTERN
+      matches_body PATTERN
+    end
   end
 end

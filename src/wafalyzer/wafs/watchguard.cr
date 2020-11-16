@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::WatchGuard < Waf
-    product "WatchGuard WAF"
+    register product: "WatchGuard WAF"
 
     PATTERN =
       Regex.union(
@@ -8,7 +8,9 @@ module Wafalyzer
         /watchguard(.technologies(.inc)?)?/i,
       )
 
-    matches_header "Server", /watchguard/i
-    matches_body PATTERN
+    builder do
+      matches_header "Server", /watchguard/i
+      matches_body PATTERN
+    end
   end
 end

@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Varnish < Waf
-    product "Varnish/CacheWall WAF"
+    register product: "Varnish/CacheWall WAF"
 
     PATTERN =
       Regex.union(
@@ -11,8 +11,10 @@ module Wafalyzer
         /.>access.is.blocked.according.to.our.site.security.policy.<+/i,
       )
 
-    matches_header %w(X-Varnish X-Cachewall-Action X-Cachewall-Reason)
-    matches_header %w(Server Via), PATTERN
-    matches_body PATTERN
+    builder do
+      matches_header %w(X-Varnish X-Cachewall-Action X-Cachewall-Reason)
+      matches_header %w(Server Via), PATTERN
+      matches_body PATTERN
+    end
   end
 end

@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::PKSecurityModule < Waf
-    product "pkSecurityModule (IDS)"
+    register product: "pkSecurityModule (IDS)"
 
     PATTERN =
       Regex.union(
@@ -9,6 +9,8 @@ module Wafalyzer
         /.>A.safety.critical.request.was.discovered.and.blocked.<./i,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

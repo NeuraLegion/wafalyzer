@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Infosafe < Waf
-    product "INFOSAFE by http://7i24.com"
+    register product: "INFOSAFE by http://7i24.com"
 
     PATTERN =
       Regex.union(
@@ -10,7 +10,9 @@ module Wafalyzer
         /var.infosafekey=/i,
       )
 
-    matches_header "Server", PATTERN
-    matches_body PATTERN
+    builder do
+      matches_header "Server", PATTERN
+      matches_body PATTERN
+    end
   end
 end

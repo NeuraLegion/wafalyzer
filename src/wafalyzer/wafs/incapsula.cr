@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Incapsula < Waf
-    product "Incapsula Web Application Firewall (Incapsula/Imperva)"
+    register product: "Incapsula Web Application Firewall (Incapsula/Imperva)"
 
     PATTERN =
       Regex.union(
@@ -9,7 +9,9 @@ module Wafalyzer
         /incapsula.incident.id/i,
       )
 
-    matches_header %w(Set-Cookie X-CDN), PATTERN
-    matches_body PATTERN
+    builder do
+      matches_header %w(Set-Cookie X-CDN), PATTERN
+      matches_body PATTERN
+    end
   end
 end

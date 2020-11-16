@@ -1,11 +1,13 @@
 module Wafalyzer
   class Waf::URLScan < Waf
-    product "URLScan (Microsoft)"
+    register product: "URLScan (Microsoft)"
 
     PATTERN =
       /rejected.by.url.scan/i
 
-    matches_header "Location", PATTERN
-    matches_body PATTERN
+    builder do
+      matches_header "Location", PATTERN
+      matches_body PATTERN
+    end
   end
 end

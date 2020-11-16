@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Viettel < Waf
-    product "Viettel WAF (Cloudrity)"
+    register product: "Viettel WAF (Cloudrity)"
 
     PATTERN =
       Regex.union(
@@ -10,6 +10,8 @@ module Wafalyzer
         /(http(s).\/\/)?cloudrity.com(.vn)?/
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

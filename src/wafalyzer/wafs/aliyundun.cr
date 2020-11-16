@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::AliYunDun < Waf
-    product "AliYunDun (WAF)"
+    register product: "AliYunDun (WAF)"
 
     PATTERN =
       Regex.union(
@@ -8,6 +8,8 @@ module Wafalyzer
         /http(s)?:\/\/(www.)?aliyun.(com|net)/i,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

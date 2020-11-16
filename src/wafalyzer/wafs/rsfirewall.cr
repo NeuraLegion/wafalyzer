@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::RSFirewall < Waf
-    product "RSFirewall (Joomla WAF)"
+    register product: "RSFirewall (Joomla WAF)"
 
     PATTERN =
       Regex.union(
@@ -10,6 +10,8 @@ module Wafalyzer
         /rsfirewall/i,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

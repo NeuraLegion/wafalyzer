@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Armor < Waf
-    product "Armor Protection (Armor Defense)"
+    register product: "Armor Protection (Armor Defense)"
 
     PATTERN =
       Regex.union(
@@ -8,6 +8,8 @@ module Wafalyzer
         /blocked.by.website.protection.from.armour/i,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

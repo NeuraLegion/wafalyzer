@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::BinarySEC < Waf
-    product "BinarySEC Web Application Firewall (BinarySEC)"
+    register product: "BinarySEC Web Application Firewall (BinarySEC)"
 
     PATTERN =
       Regex.union(
@@ -9,6 +9,8 @@ module Wafalyzer
         /\bbinarysec\b/i,
       )
 
-    matches_any_header PATTERN
+    builder do
+      matches_any_header PATTERN
+    end
   end
 end

@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Janusec < Waf
-    product "Janusec Application Gateway (WAF)"
+    register product: "Janusec Application Gateway (WAF)"
 
     PATTERN =
       Regex.union(
@@ -8,6 +8,8 @@ module Wafalyzer
         /(http(s)?\W+(www.)?)?janusec.(com|net|org)/i,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

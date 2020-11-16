@@ -1,7 +1,7 @@
 require "../spec_helper"
 
 Spectator.describe Wafalyzer::Waf do
-  subject { Wafalyzer::Waf::ToughWaf.new }
+  subject { Wafalyzer::Waf::ToughWaf.instance }
 
   describe "#product" do
     it "returns an non-empty string" do
@@ -11,8 +11,8 @@ Spectator.describe Wafalyzer::Waf do
   end
 
   describe "#to_s" do
-    it "aliases to #product?" do
-      expect(&.to_s).to eq(subject.product?)
+    it "aliases to #product" do
+      expect(&.to_s).to eq(subject.product)
     end
   end
 
@@ -58,7 +58,7 @@ Spectator.describe Wafalyzer::Waf do
     end
 
     context "with matching status" do
-      subject { Wafalyzer::Waf::SuperToughWaf.new }
+      subject { Wafalyzer::Waf::SuperToughWaf.instance }
 
       let(response) do
         HTTP::Client::Response.new(
@@ -73,7 +73,7 @@ Spectator.describe Wafalyzer::Waf do
     end
 
     context "with non-matching status" do
-      subject { Wafalyzer::Waf::SuperToughWaf.new }
+      subject { Wafalyzer::Waf::SuperToughWaf.instance }
 
       let(response) do
         HTTP::Client::Response.new(

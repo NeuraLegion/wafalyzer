@@ -1,10 +1,12 @@
 module Wafalyzer
   class Waf::Teros < Waf
-    product "Teros Web Application Firewall (Citrix)"
+    register product: "Teros Web Application Firewall (Citrix)"
 
     PATTERN =
       /st8(id|.wa|.wf)?.?(\d+|\w+)?/i
 
-    matches_any_header_value PATTERN
+    builder do
+      matches_any_header_value PATTERN
+    end
   end
 end

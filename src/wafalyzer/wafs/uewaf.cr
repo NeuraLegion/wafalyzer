@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::UEWaf < Waf
-    product "UEWaf (UCloud)"
+    register product: "UEWaf (UCloud)"
 
     PATTERN =
       Regex.union(
@@ -8,6 +8,8 @@ module Wafalyzer
         /uewaf(.deny.pages)/i,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

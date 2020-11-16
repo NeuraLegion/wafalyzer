@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::ATS < Waf
-    product "Apache Traffic Server (ATS web proxy)"
+    register product: "Apache Traffic Server (ATS web proxy)"
 
     PATTERN =
       Regex.union(
@@ -9,6 +9,8 @@ module Wafalyzer
         /ats/i,
       )
 
-    matches_header %w(Via Server), PATTERN
+    builder do
+      matches_header %w(Via Server), PATTERN
+    end
   end
 end

@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::BigIP < Waf
-    product "BIG-IP (F5 Networks)"
+    register product: "BIG-IP (F5 Networks)"
 
     PATTERN =
       Regex.union(
@@ -12,6 +12,8 @@ module Wafalyzer
         /bigipserver/i,
       )
 
-    matches_header %w(Server Set-Cookie Cookie), PATTERN
+    builder do
+      matches_header %w(Server Set-Cookie Cookie), PATTERN
+    end
   end
 end

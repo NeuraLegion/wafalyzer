@@ -1,11 +1,13 @@
 module Wafalyzer
   class Waf::Anquanbao < Waf
-    product "Anquanbao Web Application Firewall (Anquanbao)"
+    register product: "Anquanbao Web Application Firewall (Anquanbao)"
 
     PATTERN =
       /.aqb_cc.error./i
 
-    matches_body PATTERN
-    matches_any_header_value PATTERN
+    builder do
+      matches_body PATTERN
+      matches_any_header_value PATTERN
+    end
   end
 end

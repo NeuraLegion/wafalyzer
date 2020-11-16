@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Akamai < Waf
-    product "AkamaiGhost Website Protection (Akamai Global Host)"
+    register product: "AkamaiGhost Website Protection (Akamai Global Host)"
 
     PATTERN =
       Regex.union(
@@ -9,7 +9,9 @@ module Wafalyzer
         /ak.bmsc./i,
       )
 
-    matches_header %w(Server Set-Cookie), PATTERN
-    matches_body PATTERN
+    builder do
+      matches_header %w(Server Set-Cookie), PATTERN
+      matches_body PATTERN
+    end
   end
 end

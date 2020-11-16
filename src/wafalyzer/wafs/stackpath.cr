@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Stackpath < Waf
-    product "Stackpath WAF (StackPath)"
+    register product: "Stackpath WAF (StackPath)"
 
     PATTERN =
       Regex.union(
@@ -8,6 +8,8 @@ module Wafalyzer
         /<h2>sorry,.you.have.been.blocked.?<.h2>/i,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

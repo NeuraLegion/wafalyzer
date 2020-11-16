@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::ShadowDaemon < Waf
-    product "Shadow Daemon Opensource (WAF)"
+    register product: "Shadow Daemon Opensource (WAF)"
 
     PATTERN =
       Regex.union(
@@ -8,7 +8,9 @@ module Wafalyzer
         /request.forbidden.by.administrative.rules./i,
       )
 
-    valid_status :forbidden
-    matches_body PATTERN
+    builder do
+      valid_status :forbidden
+      matches_body PATTERN
+    end
   end
 end

@@ -1,7 +1,9 @@
 module Wafalyzer
   class Waf::Airlock < Waf
-    product "Airlock (Phion/Ergon)"
+    register product: "Airlock (Phion/Ergon)"
 
-    matches_header "Set-Cookie", /\Aal[.-]?(sess|lb)=?/i
+    builder do
+      matches_header "Set-Cookie", /\Aal[.-]?(sess|lb)=?/i
+    end
   end
 end

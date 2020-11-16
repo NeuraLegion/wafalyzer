@@ -1,10 +1,12 @@
 module Wafalyzer
   class Waf::Wallarm < Waf
-    product "Wallarm WAF"
+    register product: "Wallarm WAF"
 
     PATTERN =
       /nginix.wallarm/
 
-    matches_header "Server", PATTERN
+    builder do
+      matches_header "Server", PATTERN
+    end
   end
 end

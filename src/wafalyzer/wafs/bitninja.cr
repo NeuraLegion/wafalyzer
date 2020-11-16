@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::BitNinja < Waf
-    product "BitNinja (WAF)"
+    register product: "BitNinja (WAF)"
 
     PATTERN =
       Regex.union(
@@ -9,6 +9,8 @@ module Wafalyzer
         /.>visitor.anti(\S)?robot.validation<./i,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

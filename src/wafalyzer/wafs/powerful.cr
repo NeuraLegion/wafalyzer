@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Powerful < Waf
-    product "Powerful Firewall (MyBB plugin)"
+    register product: "Powerful Firewall (MyBB plugin)"
 
     PATTERN =
       Regex.union(
@@ -8,7 +8,9 @@ module Wafalyzer
         /http(s)?...tiny.cc.powerful.firewall/i,
       )
 
-    valid_status :forbidden
-    matches_body PATTERN
+    builder do
+      valid_status :forbidden
+      matches_body PATTERN
+    end
   end
 end

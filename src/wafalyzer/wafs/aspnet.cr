@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::ASPNet < Waf
-    product "ASP.NET Generic Website Protection (Microsoft)"
+    register product: "ASP.NET Generic Website Protection (Microsoft)"
 
     PATTERN =
       Regex.union(

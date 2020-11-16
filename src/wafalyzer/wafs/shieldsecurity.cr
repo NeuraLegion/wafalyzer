@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::ShieldSecurity < Waf
-    product "Shield Security"
+    register product: "Shield Security"
 
     PATTERN =
       Regex.union(
@@ -9,6 +9,8 @@ module Wafalyzer
         /url.{1,2}form.or.cookie.data.wasn.t.appropriate/i,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

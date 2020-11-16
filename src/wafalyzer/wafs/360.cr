@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Waf360 < Waf
-    product "360 Web Application Firewall (360)"
+    register product: "360 Web Application Firewall (360)"
 
     PATTERN =
       Regex.union(
@@ -11,7 +11,9 @@ module Wafalyzer
         /transfer.is.blocked/i,
       )
 
-    matches_header %w(Server X-Powered-By-360wzb), PATTERN
-    matches_body PATTERN
+    builder do
+      matches_header %w(Server X-Powered-By-360wzb), PATTERN
+      matches_body PATTERN
+    end
   end
 end

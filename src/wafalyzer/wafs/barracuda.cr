@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Barracuda < Waf
-    product "Barracuda Web Application Firewall (Barracuda Networks)"
+    register product: "Barracuda Web Application Firewall (Barracuda Networks)"
 
     PATTERN =
       Regex.union(
@@ -9,7 +9,9 @@ module Wafalyzer
         /barracuda.networks.{1,2}inc/i,
       )
 
-    matches_header "Set-Cookie", PATTERN
-    matches_body PATTERN
+    builder do
+      matches_header "Set-Cookie", PATTERN
+      matches_body PATTERN
+    end
   end
 end

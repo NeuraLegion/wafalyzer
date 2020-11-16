@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::AlertLogic < Waf
-    product "Alert Logic (SIEMless Threat Management)"
+    register product: "Alert Logic (SIEMless Threat Management)"
 
     PATTERNS = {
       /.>requested.url.cannot.be.found<./i,

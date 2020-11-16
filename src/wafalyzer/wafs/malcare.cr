@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::MalCare < Waf
-    product "MalCare (MalCare Security WAF)"
+    register product: "MalCare (MalCare Security WAF)"
 
     PATTERN =
       Regex.union(
@@ -9,6 +9,8 @@ module Wafalyzer
         /.>firewall<.+.><.+>powered.by<.+.>(<.+.>)?(.?malcare.-.pro|blogvault)?/i,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

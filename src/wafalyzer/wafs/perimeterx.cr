@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::PerimeterX < Waf
-    product "Anti Bot Protection (PerimeterX)"
+    register product: "Anti Bot Protection (PerimeterX)"
 
     PATTERN =
       Regex.union(
@@ -10,6 +10,8 @@ module Wafalyzer
         /(..)?client.perimeterx.*\/[a-zA-Z]{8,15}\/*.*.js/i,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

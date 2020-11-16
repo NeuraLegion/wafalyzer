@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::NexusGuard < Waf
-    product "NexusGuard Security (WAF)"
+    register product: "NexusGuard Security (WAF)"
 
     PATTERN =
       Regex.union(
@@ -8,6 +8,8 @@ module Wafalyzer
         /((http(s)?:\/\/)?speresources.)?nexusguard.com.wafpage/i,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

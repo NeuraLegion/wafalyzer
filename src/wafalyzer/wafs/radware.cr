@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Radware < Waf
-    product "Radware (AppWall WAF)"
+    register product: "Radware (AppWall WAF)"
 
     PATTERN =
       Regex.union(
@@ -9,6 +9,8 @@ module Wafalyzer
         /with.the.following.case.number.in.its.subject:.\d+./i,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

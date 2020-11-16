@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Bekchy < Waf
-    product "Bekchy (WAF)"
+    register product: "Bekchy (WAF)"
 
     PATTERN =
       Regex.union(
@@ -8,6 +8,8 @@ module Wafalyzer
         /(http(s)?:\/\/)(www.)?bekchy.com(\/report)?/i,
       )
 
-    matches_body PATTERN
+    builder do
+      matches_body PATTERN
+    end
   end
 end

@@ -12,7 +12,7 @@ end
 
 module Wafalyzer
   class Waf::ToughWaf < Waf
-    product "Tough XTreme Super Pro Plus Hardcore 3000 WAF Solution"
+    register product: "Tough XTreme Super Pro Plus Hardcore 3000 WAF Solution"
 
     PATTERN =
       Regex.union(
@@ -20,14 +20,18 @@ module Wafalyzer
         /__tough_id/i,
       )
 
-    matches_header %w(Server Set-Cookie), PATTERN
-    matches_body PATTERN
+    builder do
+      matches_header %w(Server Set-Cookie), PATTERN
+      matches_body PATTERN
+    end
   end
 
   class Waf::SuperToughWaf < Waf
-    product "***"
+    register product: "***"
 
-    valid_status :forbidden
-    matches_header %w(Server Cookies Set-Cookie), /__s0m00cht0ugh/
+    builder do
+      valid_status :forbidden
+      matches_header %w(Server Cookies Set-Cookie), /__s0m00cht0ugh/
+    end
   end
 end

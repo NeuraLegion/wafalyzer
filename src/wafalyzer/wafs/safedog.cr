@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::SafeDog < Waf
-    product "SafeDog WAF (SafeDog)"
+    register product: "SafeDog WAF (SafeDog)"
 
     PATTERN =
       Regex.union(
@@ -8,7 +8,9 @@ module Wafalyzer
         /waf(.?\d+.?\d+)/i,
       )
 
-    matches_header "X-Powered-By", PATTERN
-    matches_body PATTERN
+    builder do
+      matches_header "X-Powered-By", PATTERN
+      matches_body PATTERN
+    end
   end
 end

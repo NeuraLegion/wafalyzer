@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::GreyWizard < Waf
-    product "Grey Wizard Protection"
+    register product: "Grey Wizard Protection"
 
     PATTERN =
       Regex.union(
@@ -10,7 +10,9 @@ module Wafalyzer
         /grey.wizard/,
       )
 
-    matches_header %w(GW-Server Server), PATTERN
-    matches_body PATTERN
+    builder do
+      matches_header %w(GW-Server Server), PATTERN
+      matches_body PATTERN
+    end
   end
 end

@@ -1,6 +1,6 @@
 module Wafalyzer
   class Waf::Yundun < Waf
-    product "Yundun Web Application Firewall (Yundun)"
+    register product: "Yundun Web Application Firewall (Yundun)"
 
     PATTERN =
       Regex.union(
@@ -10,7 +10,9 @@ module Wafalyzer
         /<title>.403.forbidden:.access.is.denied.{0,2}<.{0,2}title>/i,
       )
 
-    matches_header %w(X-Cache Server Set-Cookie), PATTERN
+    builder do
+      matches_header %w(X-Cache Server Set-Cookie), PATTERN
+    end
 
     def matches?(response : HTTP::Client::Response) : Bool
       if response.status.code == 461 && response.body? =~ PATTERN
