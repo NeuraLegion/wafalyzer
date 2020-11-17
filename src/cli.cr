@@ -71,7 +71,7 @@ OptionParser.parse do |parser|
   end
 
   parser.on "--wafs", "Outputs a list of possible firewalls that can be detected" do
-    puts Wafalyzer.wafs.join('\n')
+    puts Wafalyzer::Waf.instances.join('\n', &.[1])
     exit
   end
 
