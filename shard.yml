@@ -7,7 +7,7 @@ authors:
 dependencies:
   baked_file_system:
     github: schovi/baked_file_system
-    version: ~> 0.9.8
+    branch: master
   climate:
     github: Sija/climate.cr
     version: ~> 0.2.0
