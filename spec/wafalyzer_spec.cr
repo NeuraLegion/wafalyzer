@@ -4,7 +4,6 @@ Spectator.describe Wafalyzer do
   let(wafs) { Wafalyzer::Waf.instances }
   let(tough_waf) { wafs[Wafalyzer::Waf::ToughWaf] }
   let(tough_waf_server) do
-    # ameba:disable Style/VerboseBlock
     HTTP::Server.new do |context|
       context.response
         .tap(&.content_type = "text/plain")
