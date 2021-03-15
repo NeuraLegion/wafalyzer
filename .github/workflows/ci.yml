@@ -2,52 +2,38 @@ name: CI
 
 on:
   push:
-    branches:
-      - master
-
   pull_request:
-    branches:
-      - master
-
   schedule:
-    - cron: "0 6 * * 1"
+    - cron: "0 3 * * 1" # Every monday at 3 AM
 
 jobs:
-  specs:
-    name: Specs
-    runs-on: ubuntu-latest
-    container: crystallang/crystal
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        crystal: [latest, nightly]
+    runs-on: ${{ matrix.os }}
+
     steps:
-      - name: Checkout source code
+      - name: Install Crystal
+        uses: oprypin/install-crystal@v1
+        with:
+          crystal: ${{ matrix.crystal }}
+
+      - name: Download source
         uses: actions/checkout@v2
 
-      - name: Install shards
+      - name: Install dependencies
         run: shards install
+        env:
+          SHARDS_OPTS: --ignore-crystal-version
 
       - name: Run specs
         run: crystal spec
 
-  check-format:
-    name: Check format
-    runs-on: ubuntu-latest
-    container: crystallang/crystal
-    steps:
-      - name: Checkout source code
-        uses: actions/checkout@v2
-
-      - name: Check sources format
+      - name: Check formatting
         run: crystal tool format --check
 
-  ameba:
-    name: Ameba linter
-    runs-on: ubuntu-latest
-    container: crystallang/crystal
-    steps:
-      - name: Checkout source code
-        uses: actions/checkout@v2
-
-      - name: Install shards
-        run: shards install
-
-      - name: Run ameba
+      - name: Run ameba linter
         run: bin/ameba
