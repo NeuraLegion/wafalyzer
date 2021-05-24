@@ -51,7 +51,7 @@ module Wafalyzer
       headers: headers.to_h,
     })
 
-    client uri, &.exec(method, uri.full_path, headers, body).tap do |response|
+    client uri, &.exec(method, uri.request_target, headers, body).tap do |response|
       Log.debug &.emit("Received HTTP response", {
         status_code: response.status.code,
         headers:     response.headers.to_h,
