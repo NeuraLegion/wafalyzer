@@ -28,7 +28,7 @@ timeout = nil
 fallback_requests_count = nil
 json = false
 use_random_user_agent = false
-disable_ssl_verifications = false
+disable_ssl_verification = false
 user_agent = nil
 
 OptionParser.parse do |parser|
