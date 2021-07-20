@@ -21,7 +21,7 @@ module Wafalyzer
       port: port,
       tls: tls,
     )
-    client.tls.verify_mode = :none if settings.disable_ssl_verification?
+    client.tls?.try(&.verify_mode = :none) if settings.disable_ssl_verification?
 
     if timeout = settings.timeout
       client
