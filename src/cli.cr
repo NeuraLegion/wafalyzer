@@ -67,7 +67,7 @@ OptionParser.parse do |parser|
     use_random_user_agent = true
   end
 
-  parser.on "-s", "--disable-ssl-verify", "Disable SSL verification" do
+  parser.on "-s", "--disable-ssl-verify", "Disables SSL verification" do
     disable_ssl_verification = true
   end
 
