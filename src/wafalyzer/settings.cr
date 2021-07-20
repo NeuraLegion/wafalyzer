@@ -27,6 +27,9 @@ module Wafalyzer
     # `User-Agent` string from the `user_agents` array.
     class_property? use_random_user_agent = false
 
+    # Setting it to `true` will disable SSL verifications
+    class_property? disable_ssl_verifications = false
+
     # Returns `User-Agent` string, sampled from `user_agents` when the
     # `use_random_user_agent?` is set to `true`, or `default_user_agent`
     # otherwise.

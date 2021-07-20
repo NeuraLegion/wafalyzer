@@ -28,6 +28,7 @@ timeout = nil
 fallback_requests_count = nil
 json = false
 use_random_user_agent = false
+disable_ssl_verifications = false
 user_agent = nil
 
 OptionParser.parse do |parser|
@@ -66,6 +67,10 @@ OptionParser.parse do |parser|
     use_random_user_agent = true
   end
 
+  parser.on "-s", "--disable-ssl-verify", "Disable SSL verifications" do
+    disable_ssl_verifications = true
+  end
+
   parser.on "-u VALUE", "--user-agent=VALUE", "Uses supplied user agent string" do |value|
     user_agent = value
   end
@@ -94,6 +99,7 @@ Wafalyzer.configure do |settings|
   settings.timeout = timeout
   settings.fallback_requests_count = fallback_requests_count
   settings.use_random_user_agent = use_random_user_agent
+  settings.disable_ssl_verifications = disable_ssl_verifications
 end
 
 wafs = Wafalyzer.detect(

@@ -21,6 +21,7 @@ module Wafalyzer
       port: port,
       tls: tls,
     )
+    client.tls.verify_mode=OpenSSL::SSL::VerifyMode::NONE if settings.disable_ssl_verifications?
 
     if timeout = settings.timeout
       client
