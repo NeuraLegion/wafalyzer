@@ -99,7 +99,7 @@ Wafalyzer.configure do |settings|
   settings.timeout = timeout
   settings.fallback_requests_count = fallback_requests_count
   settings.use_random_user_agent = use_random_user_agent
-  settings.disable_ssl_verifications = disable_ssl_verifications
+  settings.disable_ssl_verification = disable_ssl_verification
 end
 
 wafs = Wafalyzer.detect(
