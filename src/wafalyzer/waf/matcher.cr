@@ -69,11 +69,12 @@ module Wafalyzer
     end
 
     protected def matches_body?(response : HTTP::Client::Response) : Bool
+      return false unless body = response.body?
+      body = body.scrub unless body.valid_encoding?
       matches_body.try do |pattern|
-        if response.body? =~ pattern
+        if body.matches?(pattern)
           Log.debug &.emit("Found body match", {
             pattern: pattern.to_s,
-            matches: $~.to_a,
           })
           return true
         end
