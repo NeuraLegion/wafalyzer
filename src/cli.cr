@@ -1,6 +1,6 @@
 require "baked_file_system"
 require "option_parser"
-require "climate"
+require "colorize"
 require "./wafalyzer"
 require "./cli/*"
 
@@ -8,18 +8,14 @@ private def fail(message : String? = nil)
   if message = message.presence
     message = "!Error¡: #{message}"
   end
-  abort(message.try(&.climatize))
+  abort(message.try(&.colorize(:red)))
 end
 
 Log.setup_from_env(
   backend: Log::IOBackend.new(formatter: Wafalyzer::CLI::LogFormatter)
 )
 
-Colorize
-  .on_tty_only!
-
-Climate.settings
-  .use_defaults!
+Colorize.on_tty_only!
 
 method = "GET"
 headers = HTTP::Headers.new
@@ -32,7 +28,7 @@ disable_ssl_verification = false
 user_agent = nil
 
 OptionParser.parse do |parser|
-  parser.banner = "Usage: {#{PROGRAM_NAME}} [arguments] <url>".climatize
+  parser.banner = "Usage: {#{PROGRAM_NAME}} [arguments] <url>"
 
   parser.on "-m VALUE", "--method=VALUE", "Uses supplied method type when issuing request" do |value|
     method = value.upcase
