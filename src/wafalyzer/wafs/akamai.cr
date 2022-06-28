@@ -10,7 +10,7 @@ module Wafalyzer
       )
 
     builder do
-      matches_header %w(Server Set-Cookie), PATTERN
+      matches_header %w(Server Set-Cookie X-Cache X-Cache-Remote), PATTERN
       matches_body PATTERN
     end
   end
